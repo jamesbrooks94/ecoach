@@ -4,7 +4,6 @@
     "noImplicitAny": false,
     "module": "commonjs",
     "strict": false,
-    "baseUrl": "./",
     "target": "es6",
     "outDir": "build",
     "sourceMap": true,

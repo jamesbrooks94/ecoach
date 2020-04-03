@@ -4,39 +4,37 @@ import { env } from './config'
 import knex from 'knex'
 import config from './knexfile'
 import { createLogger } from './logger'
+import bff from './bff'
 
-const logger = createLogger('e-coach-db')
+const logger = createLogger('ecoach-db')
 
 logger.info('Starting migration')
 const client = knex(config)
-logger.info
-client.migrate
-  .latest()
-  .then(() => {
+
+const init = async () => {
+  try {
+    await client.migrate.latest()
     logger.info('Migrated to latest DB')
-  })
-  .catch((e) => {
+
+    const db = express()
+
+    db.use(
+      postgraphile(env.DB_CONNECTION, 'public', {
+        watchPg: true,
+        graphiql: true,
+        enhanceGraphiql: true,
+        graphiqlRoute: '/',
+      })
+    )
+
+    db.listen(env.DB_PORT, () => {
+      logger.info(`Listening on port ${env.DB_PORT}`)
+      bff()
+    })
+  } catch (e) {
     logger.error('Migration to latest DB failed')
     logger.error(e)
-  })
+  }
+}
 
-const db = express()
-db.use(
-  postgraphile(env.DB_CONNECTION, 'public', {
-    watchPg: true,
-    graphiql: true,
-    enhanceGraphiql: true,
-    graphiqlRoute: '/',
-  })
-)
-db.listen(env.DB_PORT, () => {
-  logger.info(`DB: Listening on port ${env.DB_PORT}`)
-})
-
-const bff = express()
-bff.get('/', (_, res) => {
-  res.send('Yes!')
-})
-bff.listen(env.BFF_PORT, () => {
-  logger.info(`BFF: Listening on port ${env.BFF_PORT}`)
-})
+init()
