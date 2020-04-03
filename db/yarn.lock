@@ -61,6 +61,13 @@
   resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/@babel/parser/-/parser-7.9.4.tgz#68a35e6b0319bbc014465be43828300113f2f2e8"
   integrity sha1-aKNeawMZu8AURlvkOCgwARPy8ug=
 
+"@babel/runtime@^7.8.7":
+  version "7.9.2"
+  resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/@babel/runtime/-/runtime-7.9.2.tgz#d90df0583a3a252f09aaa619665367bae518db06"
+  integrity sha1-2Q3wWDo6JS8JqqYZZlNnuuUY2wY=
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/template@^7.8.3":
   version "7.8.6"
   resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/@babel/template/-/template-7.8.6.tgz#86b22af15f828dfb086474f964dcc3e39c43ce2b"
@@ -259,6 +266,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/yup@0.26.34":
+  version "0.26.34"
+  resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/@types/yup/-/yup-0.26.34.tgz#199329f9fee5074a7385b4a4a25d1559db628aef"
+  integrity sha1-GZMp+f7lB0pzhbSkol0VWdtiiu8=
+
 "@typescript-eslint/eslint-plugin@^2.26.0":
   version "2.26.0"
   resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/@typescript-eslint/eslint-plugin/-/eslint-plugin-2.26.0.tgz#04c96560c8981421e5a9caad8394192363cc423f"
@@ -301,6 +313,13 @@
     lodash "^4.17.15"
     semver "^6.3.0"
     tsutils "^3.17.1"
+
+"@wry/equality@^0.1.2":
+  version "0.1.11"
+  resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/@wry/equality/-/equality-0.1.11.tgz#35cb156e4a96695aa81a9ecc4d03787bc17f1790"
+  integrity sha1-NcsVbkqWaVqoGp7MTQN4e8F/F5A=
+  dependencies:
+    tslib "^1.9.3"
 
 abbrev@1:
   version "1.1.1"
@@ -386,6 +405,26 @@ anymatch@~3.1.1:
   dependencies:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
+
+apollo-link@^1.2.3:
+  version "1.2.13"
+  resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/apollo-link/-/apollo-link-1.2.13.tgz#dff00fbf19dfcd90fddbc14b6a3f9a771acac6c4"
+  integrity sha1-3/APvxnfzZD928FLaj+adxrKxsQ=
+  dependencies:
+    apollo-utilities "^1.3.0"
+    ts-invariant "^0.4.0"
+    tslib "^1.9.3"
+    zen-observable-ts "^0.8.20"
+
+apollo-utilities@^1.0.1, apollo-utilities@^1.3.0:
+  version "1.3.3"
+  resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/apollo-utilities/-/apollo-utilities-1.3.3.tgz#f1854715a7be80cd810bc3ac95df085815c0787c"
+  integrity sha1-8YVHFae+gM2BC8Osld8IWBXAeHw=
+  dependencies:
+    "@wry/equality" "^0.1.2"
+    fast-json-stable-stringify "^2.0.0"
+    ts-invariant "^0.4.0"
+    tslib "^1.10.0"
 
 arg@^4.1.0:
   version "4.1.3"
@@ -910,6 +949,11 @@ depd@~1.1.2:
   resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/depd/-/depd-1.1.2.tgz#9bcd52e14c097763e749b274c4346ed2e560b5a9"
   integrity sha1-m81S4UwJd2PnSbJ0xDRu0uVgtak=
 
+deprecated-decorator@^0.1.6:
+  version "0.1.6"
+  resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/deprecated-decorator/-/deprecated-decorator-0.1.6.tgz#00966317b7a12fe92f3cc831f7583af329b86c37"
+  integrity sha1-AJZjF7ehL+kvPMgx91g68ym4bDc=
+
 destroy@~1.0.4:
   version "1.0.4"
   resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/destroy/-/destroy-1.0.4.tgz#978857442c44749e4206613e37946205826abd80"
@@ -1392,6 +1436,11 @@ flatted@^2.0.0:
   resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/flatted/-/flatted-2.0.2.tgz#4575b21e2bcee7434aa9be662f4b7b5f9c2b5138"
   integrity sha1-RXWyHivO50NKqb5mL0t7X5wrUTg=
 
+fn-name@~3.0.0:
+  version "3.0.0"
+  resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/fn-name/-/fn-name-3.0.0.tgz#0596707f635929634d791f452309ab41558e3c5c"
+  integrity sha1-BZZwf2NZKWNNeR9FIwmrQVWOPFw=
+
 for-in@^1.0.1, for-in@^1.0.2:
   version "1.0.2"
   resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
@@ -1611,12 +1660,39 @@ graphql-iso-date@^3.6.0:
   resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/graphql-iso-date/-/graphql-iso-date-3.6.1.tgz#bd2d0dc886e0f954cbbbc496bbf1d480b57ffa96"
   integrity sha1-vS0NyIbg+VTLu8SWu/HUgLV/+pY=
 
+graphql-middleware@^4.0.2:
+  version "4.0.2"
+  resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/graphql-middleware/-/graphql-middleware-4.0.2.tgz#eb589bf428e1795e48cd6a3cfeeba0807b996ebd"
+  integrity sha1-61ib9CjheV5IzWo8/uuggHuZbr0=
+  dependencies:
+    graphql-tools "^4.0.5"
+
 graphql-parse-resolve-info@4.5.0:
   version "4.5.0"
   resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/graphql-parse-resolve-info/-/graphql-parse-resolve-info-4.5.0.tgz#cb9bf800c9ce81eebecd86ec62182a7b645d1fad"
   integrity sha1-y5v4AMnOge6+zYbsYhgqe2RdH60=
   dependencies:
     debug "^4.1.1"
+
+graphql-shield@^7.2.2:
+  version "7.2.2"
+  resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/graphql-shield/-/graphql-shield-7.2.2.tgz#daf9a91c6b8487b5f00dea12c8ab3bb85947471a"
+  integrity sha1-2vmpHGuEh7XwDeoSyKs7uFlHRxo=
+  dependencies:
+    "@types/yup" "0.26.34"
+    object-hash "^2.0.3"
+    yup "^0.28.3"
+
+graphql-tools@^4.0.5:
+  version "4.0.7"
+  resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/graphql-tools/-/graphql-tools-4.0.7.tgz#743309b96cb657ff45b607ee0a07193cd987e43c"
+  integrity sha1-dDMJuWy2V/9FtgfuCgcZPNmH5Dw=
+  dependencies:
+    apollo-link "^1.2.3"
+    apollo-utilities "^1.0.1"
+    deprecated-decorator "^0.1.6"
+    iterall "^1.1.3"
+    uuid "^3.1.0"
 
 "graphql@>=0.9 <0.14 || ^14.0.2", "graphql@^0.6.0 || ^0.7.0 || ^0.8.0-b || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.2":
   version "14.6.0"
@@ -1999,7 +2075,7 @@ isobject@^3.0.0, isobject@^3.0.1:
   resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
   integrity sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
 
-iterall@^1.0.2, iterall@^1.2.1, iterall@^1.2.2:
+iterall@^1.0.2, iterall@^1.1.3, iterall@^1.2.1, iterall@^1.2.2:
   version "1.3.0"
   resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/iterall/-/iterall-1.3.0.tgz#afcb08492e2915cbd8a0884eb93a8c94d0d72fea"
   integrity sha1-r8sISS4pFcvYoIhOuTqMlNDXL+o=
@@ -2152,6 +2228,11 @@ liftoff@3.1.0:
     object.map "^1.0.0"
     rechoir "^0.6.2"
     resolve "^1.1.7"
+
+lodash-es@^4.17.11:
+  version "4.17.15"
+  resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/lodash-es/-/lodash-es-4.17.15.tgz#21bd96839354412f23d7a10340e5eac6ee455d78"
+  integrity sha1-Ib2Wg5NUQS8j16EDQOXqxu5FXXg=
 
 lodash.includes@^4.3.0:
   version "4.3.0"
@@ -2438,6 +2519,11 @@ object-copy@^0.1.0:
     copy-descriptor "^0.1.0"
     define-property "^0.2.5"
     kind-of "^3.0.3"
+
+object-hash@^2.0.3:
+  version "2.0.3"
+  resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/object-hash/-/object-hash-2.0.3.tgz#d12db044e03cd2ca3d77c0570d87225b02e1e6ea"
+  integrity sha1-0S2wROA80so9d8BXDYciWwLh5uo=
 
 object-visit@^1.0.0:
   version "1.0.1"
@@ -2805,6 +2891,11 @@ progress@^2.0.0:
   resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
   integrity sha1-foz42PW48jnBvGi+tOt4Vn1XLvg=
 
+property-expr@^2.0.0:
+  version "2.0.2"
+  resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/property-expr/-/property-expr-2.0.2.tgz#fff2a43919135553a3bc2fdd94bdb841965b2330"
+  integrity sha1-//KkORkTVVOjvC/dlL24QZZbIzA=
+
 proxy-addr@~2.0.5:
   version "2.0.6"
   resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/proxy-addr/-/proxy-addr-2.0.6.tgz#fdc2336505447d3f2f2c638ed272caf614bbb2bf"
@@ -2893,6 +2984,11 @@ rechoir@^0.6.2:
   integrity sha1-hSBLVNuoLVdC4oyWdW70OvUOM4Q=
   dependencies:
     resolve "^1.1.6"
+
+regenerator-runtime@^0.13.4:
+  version "0.13.5"
+  resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/regenerator-runtime/-/regenerator-runtime-0.13.5.tgz#d878a1d094b4306d10b9096484b33ebd55e26697"
+  integrity sha1-2Hih0JS0MG0QuQlkhLM+vVXiZpc=
 
 regex-not@^1.0.0, regex-not@^1.0.2:
   version "1.0.2"
@@ -3324,6 +3420,11 @@ symbol-observable@^1.0.4:
   resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
   integrity sha1-wiaIrtTqs83C3+rLtWFmBWCgCAQ=
 
+synchronous-promise@^2.0.10:
+  version "2.0.10"
+  resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/synchronous-promise/-/synchronous-promise-2.0.10.tgz#e64c6fd3afd25f423963353043f4a68ebd397fd8"
+  integrity sha1-5kxv06/SX0I5YzUwQ/Smjr05f9g=
+
 table@^5.2.3:
   version "5.4.6"
   resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/table/-/table-5.4.6.tgz#1292d19500ce3f86053b05f0e8e7e4a3bb21079e"
@@ -3420,6 +3521,11 @@ toidentifier@1.0.0:
   resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/toidentifier/-/toidentifier-1.0.0.tgz#7e1be3470f1e77948bc43d94a3c8f4d7752ba553"
   integrity sha1-fhvjRw8ed5SLxD2Uo8j013UrpVM=
 
+toposort@^2.0.2:
+  version "2.0.2"
+  resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/toposort/-/toposort-2.0.2.tgz#ae21768175d1559d48bef35420b2f4962f09c330"
+  integrity sha1-riF2gXXRVZ1IvvNUILL0li8JwzA=
+
 touch@^3.1.0:
   version "3.1.0"
   resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/touch/-/touch-3.1.0.tgz#fe365f5f75ec9ed4e56825e0bb76d24ab74af83b"
@@ -3432,6 +3538,13 @@ triple-beam@^1.2.0, triple-beam@^1.3.0:
   resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/triple-beam/-/triple-beam-1.3.0.tgz#a595214c7298db8339eeeee083e4d10bd8cb8dd9"
   integrity sha1-pZUhTHKY24M57u7gg+TRC9jLjdk=
 
+ts-invariant@^0.4.0:
+  version "0.4.4"
+  resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/ts-invariant/-/ts-invariant-0.4.4.tgz#97a523518688f93aafad01b0e80eb803eb2abd86"
+  integrity sha1-l6UjUYaI+TqvrQGw6A64A+sqvYY=
+  dependencies:
+    tslib "^1.9.3"
+
 ts-node@^8.8.1:
   version "8.8.1"
   resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/ts-node/-/ts-node-8.8.1.tgz#7c4d3e9ed33aa703b64b28d7f9d194768be5064d"
@@ -3443,7 +3556,7 @@ ts-node@^8.8.1:
     source-map-support "^0.5.6"
     yn "3.1.1"
 
-tslib@^1.5.0, tslib@^1.8.1, tslib@^1.9.0:
+tslib@^1.10.0, tslib@^1.5.0, tslib@^1.8.1, tslib@^1.9.0, tslib@^1.9.3:
   version "1.11.1"
   resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/tslib/-/tslib-1.11.1.tgz#eb15d128827fbee2841549e171f45ed338ac7e35"
   integrity sha1-6xXRKIJ/vuKEFUnhcfRe0zisfjU=
@@ -3582,6 +3695,11 @@ utils-merge@1.0.1:
   resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
 
+uuid@^3.1.0:
+  version "3.4.0"
+  resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
+  integrity sha1-sj5DWK+oogL+ehAK8fX4g/AgB+4=
+
 uuid@^7.0.1:
   version "7.0.3"
   resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/uuid/-/uuid-7.0.3.tgz#c5c9f2c8cf25dc0a372c4df1441c41f5bd0c680b"
@@ -3710,3 +3828,29 @@ yn@3.1.1:
   version "3.1.1"
   resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/yn/-/yn-3.1.1.tgz#1e87401a09d767c1d5eab26a6e4c185182d2eb50"
   integrity sha1-HodAGgnXZ8HV6rJqbkwYUYLS61A=
+
+yup@^0.28.3:
+  version "0.28.3"
+  resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/yup/-/yup-0.28.3.tgz#1ca607405a8adf24a5ac51f54bd09d527555f0ba"
+  integrity sha1-HKYHQFqK3ySlrFH1S9CdUnVV8Lo=
+  dependencies:
+    "@babel/runtime" "^7.8.7"
+    fn-name "~3.0.0"
+    lodash "^4.17.15"
+    lodash-es "^4.17.11"
+    property-expr "^2.0.0"
+    synchronous-promise "^2.0.10"
+    toposort "^2.0.2"
+
+zen-observable-ts@^0.8.20:
+  version "0.8.20"
+  resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/zen-observable-ts/-/zen-observable-ts-0.8.20.tgz#44091e335d3fcbc97f6497e63e7f57d5b516b163"
+  integrity sha1-RAkeM10/y8l/ZJfmPn9X1bUWsWM=
+  dependencies:
+    tslib "^1.9.3"
+    zen-observable "^0.8.0"
+
+zen-observable@^0.8.0:
+  version "0.8.15"
+  resolved "https://eurostar.jfrog.io/eurostar/api/npm/npm/zen-observable/-/zen-observable-0.8.15.tgz#96415c512d8e3ffd920afd3889604e30b9eaac15"
+  integrity sha1-lkFcUS2OP/2SCv04iWBOMLnqrBU=
