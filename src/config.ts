@@ -6,7 +6,8 @@ config()
 export const env = cleanEnv(
   process.env,
   {
-    PORT: port({ devDefault: 3000 }),
+    DB_PORT: port({ devDefault: 8000 }),
+    BFF_PORT: port({ devDefault: 3000 }),
     DB_CONNECTION: str({ devDefault: 'postgres://postgres@localhost:5432/ecoach' }),
   },
   {

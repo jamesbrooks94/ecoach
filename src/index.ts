@@ -2,13 +2,14 @@ import express from 'express'
 import { postgraphile } from 'postgraphile'
 import { env } from './config'
 import knex from 'knex'
-import { config } from './knexfile'
+import config from './knexfile'
 import { createLogger } from './logger'
 
 const logger = createLogger('e-coach-db')
 
 logger.info('Starting migration')
-const client = knex(config.development)
+const client = knex(config)
+logger.info
 client.migrate
   .latest()
   .then(() => {
@@ -19,9 +20,8 @@ client.migrate
     logger.error(e)
   })
 
-const app = express()
-
-app.use(
+const db = express()
+db.use(
   postgraphile(env.DB_CONNECTION, 'public', {
     watchPg: true,
     graphiql: true,
@@ -29,7 +29,14 @@ app.use(
     graphiqlRoute: '/',
   })
 )
-const port = env.PORT || 8000
-app.listen(port, () => {
-  logger.info(`Listening on port ${port}`)
+db.listen(env.DB_PORT, () => {
+  logger.info(`DB: Listening on port ${env.DB_PORT}`)
+})
+
+const bff = express()
+bff.get('/', (_, res) => {
+  res.send('Yes!')
+})
+bff.listen(env.BFF_PORT, () => {
+  logger.info(`BFF: Listening on port ${env.BFF_PORT}`)
 })
