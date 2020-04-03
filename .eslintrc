@@ -1,0 +1,26 @@
+{
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": ["plugin:@typescript-eslint/recommended", "eslint:recommended", "prettier"],
+  "parser": "babel-eslint",
+  "plugins": ["prettier", "jest"],
+  "rules": {
+    "strict": [2, "never"],
+    "prefer-const": "error",
+    "no-unused-vars": "off",
+    "import/unambiguous": "off",
+    "import/prefer-default-export": "off",
+    "linebreak-style": "off",
+    "prettier/prettier": "error",
+    "import/no-unresolved": "off",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/valid-expect": "error",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/explicit-function-return-type": "off"
+  }
+}
