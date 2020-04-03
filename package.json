@@ -5,20 +5,22 @@
   "author": "James Brooks <james@brookode.uk>",
   "license": "MIT",
   "scripts": {
-    "db:new": "knex -x ts migrate:make",
-    "db:up": "knex migrate:latest",
-    "db:down": "knex migrate:rollback",
-    "db:teardown": "knex migrate:rollback --all",
-    "lint": "eslint migrations/**/*.ts --fix",
-    "dev": "tsc src/index.ts --watch & nodemon dist",
-    "start": "nodemon"
+    "db:new": "knex --knexfile src/knexfile.ts -x ts migrate:make",
+    "db:up": "knex --knexfile src/knexfile.ts migrate:latest",
+    "db:down": "knex --knexfile src/knexfile.ts migrate:rollback",
+    "db:teardown": "knex --knexfile src/knexfile.ts migrate:rollback --all",
+    "dev": "nodemon",
+    "build": "rm -rf build && tsc && cp -r node_modules build/node_modules"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
+    "envalid": "^6.0.1",
     "express": "^4.17.1",
     "graphile-build-pg": "^4.5.3",
     "knex": "^0.20.13",
     "pg": "^8.0.0",
-    "postgraphile": "^4.6.0"
+    "postgraphile": "^4.6.0",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "@types/node": "^13.11.0",

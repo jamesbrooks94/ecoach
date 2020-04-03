@@ -1,14 +1,16 @@
 // Update with your config settings.
+import { env } from './config'
 
-module.exports = {
+export const config = {
   development: {
     client: 'postgresql',
-    connection: process.env.PG_CONNECTION_STRING || 'postgres://postgres@localhost:5432/ecoach',
+    connection: env.DB_CONNECTION,
     pool: {
       min: 2,
       max: 10,
     },
     migrations: {
+      directory: './src/migrations',
       tableName: 'knex_migrations',
     },
   },

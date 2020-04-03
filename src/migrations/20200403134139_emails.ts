@@ -3,7 +3,6 @@ import * as Knex from 'knex'
 export const up = (knex: Knex): Promise<any> =>
   knex.schema.createTable('email', (table) => {
     table.increments('id').notNullable().unique().primary()
-
     table.text('title').notNullable()
     table.text('content_plain').notNullable()
     table.text('content_html').notNullable()
