@@ -6,10 +6,7 @@
   "license": "MIT",
   "scripts": {
     "db:new": "knex --knexfile src/knexfile.ts -x ts migrate:make",
-    "db:up": "knex --knexfile src/knexfile.ts migrate:latest",
-    "db:down": "knex --knexfile src/knexfile.ts migrate:rollback",
-    "db:teardown": "knex --knexfile src/knexfile.ts migrate:rollback --all",
-    "dev": "nodemon",
+    "start": "nodemon",
     "build": "rm -rf build && tsc && cp -r node_modules build/node_modules"
   },
   "dependencies": {
