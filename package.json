@@ -8,7 +8,9 @@
     "db:new": "knex --knexfile src/knexfile.ts -x ts migrate:make",
     "db:down": "knex --knexfile src/knexfile.ts migrate:down",
     "start": "nodemon",
-    "build": "rm -rf build && tsc && cp -r node_modules build/node_modules && cp package.json build/package.json"
+    "build": "rm -rf build && tsc && cp -r node_modules build/node_modules && cp package.json build/package.json",
+    "heroku:push": "yarn build && heroku container:push -a e-coach-staging web",
+    "heroku:deploy": "heroku container:release web -a e-coach-staging"
   },
   "dependencies": {
     "auth0": "^2.24.0",
