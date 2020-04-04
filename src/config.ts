@@ -6,7 +6,7 @@ config()
 export const env = cleanEnv(
   process.env,
   {
-    DB_PORT: port({ devDefault: 8000 }),
+    PORT: port({ devDefault: 8000 }),
     MIGRATIONS_DIRECTORY: str({ devDefault: './src/migrations' }),
     DB_CONNECTION: str({ devDefault: 'postgres://postgres@localhost:5432/ecoach' }),
     AUTH_DOMAIN: str(),

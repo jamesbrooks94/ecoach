@@ -4,7 +4,7 @@ import { Logger } from 'winston'
 import { IUser } from '../interfaces'
 import { createLogger } from '../logger'
 
-import { env } from '../config'
+import { env } from '../../config'
 import { getSigningKey, formatUserInfo, applyPermissions } from './utils'
 
 const logger: Logger = createLogger(`ecoach-auth`)
