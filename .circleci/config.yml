@@ -2,6 +2,11 @@ version: 2.1
 orbs:
   node: circleci/node@1.1.6
 jobs:
+  docker_build:
+    steps:
+      run:
+        name: Build docker image
+        command: ls
   build-and-test:
     executor:
       name: node/default
@@ -11,7 +16,11 @@ jobs:
           steps:
             - run: cd db && yarn install
             - run: cd db && yarn build
+
 workflows:
-    build-and-test:
-      jobs:
-        - build-and-test
+  build-and-test:
+    jobs:
+      - build-and-test
+      - docker_build:
+        requires:
+          - build-and-test
