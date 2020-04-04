@@ -9,8 +9,8 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run: cd db && yarn install
-            - run: cd db && yarn build
+            - run: cd yarn install
+            - run: cd yarn build
 workflows:
   build-and-test:
     jobs:
