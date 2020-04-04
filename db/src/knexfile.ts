@@ -9,7 +9,7 @@ export default {
     max: 10,
   },
   migrations: {
-    directory: './src/migrations',
+    directory: env.MIGRATIONS_DIRECTORY,
     tableName: 'knex_migrations',
   },
 }
