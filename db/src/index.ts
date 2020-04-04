@@ -57,7 +57,9 @@ const logger = createLogger('ecoach-db')
 
 const init = async () => {
   try {
-    const client = knex(config)
+    const c = config
+    c.migrations.directory = './src/migrations'
+    const client = knex(c)
     logger.info('Starting migration')
     await client.migrate.latest()
     logger.info('Migrated to latest DB')

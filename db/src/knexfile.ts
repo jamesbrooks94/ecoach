@@ -1,7 +1,6 @@
-// Update with your config settings.
 import { env } from './config'
 
-export default {
+const config = {
   client: 'postgresql',
   connection: env.DB_CONNECTION,
   pool: {
@@ -13,3 +12,6 @@ export default {
     tableName: 'knex_migrations',
   },
 }
+
+export default config
+module.exports = config

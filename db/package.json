@@ -1,11 +1,12 @@
 {
-  "name": "bltc_db",
+  "name": "ecoach",
   "version": "1.0.0",
   "main": "index.js",
   "author": "James Brooks <james@brookode.uk>",
   "license": "MIT",
   "scripts": {
     "db:new": "knex --knexfile src/knexfile.ts -x ts migrate:make",
+    "db:down": "knex --knexfile src/knexfile.ts migrate:down",
     "start": "nodemon",
     "build": "rm -rf build && tsc && cp -r node_modules build/node_modules && cp package.json build/package.json"
   },
