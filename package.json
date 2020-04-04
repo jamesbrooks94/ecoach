@@ -5,11 +5,14 @@
   "author": "James Brooks <james@brookode.uk>",
   "license": "MIT",
   "scripts": {
+    "build:server": "tsc --project tsconfig.server.json",
+    "build:next": "next build",
+    "build": "rm -rf build && rm -rf .next && npm run build:next && npm run build:server",
+    "start": "NODE_ENV=production node build/index.js",
+    "dev": "ts-node --project tsconfig.server.json src/index.ts",
     "db:new": "knex --knexfile src/knexfile.ts -x ts migrate:make",
     "db:down": "knex --knexfile src/knexfile.ts migrate:down",
-    "start": "nodemon",
-    "build": "rm -rf build && tsc && cp -r node_modules build/node_modules && cp package.json build/package.json",
-    "heroku:push": "yarn build && heroku container:push -a e-coach-staging web",
+    "heroku:push": "yarn build && heroku container:push web -a e-coach-staging",
     "heroku:deploy": "heroku container:release web -a e-coach-staging"
   },
   "dependencies": {
@@ -23,12 +26,17 @@
     "graphql-shield": "^7.2.2",
     "jwks-rsa": "^1.7.0",
     "knex": "^0.20.13",
+    "next": "^9.3.4",
     "pg": "^8.0.0",
     "postgraphile": "^4.6.0",
+    "postgraphile-plugin-connection-filter": "^1.1.3",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "winston": "^3.2.1"
   },
   "devDependencies": {
     "@types/node": "^13.11.0",
+    "@types/react": "^16.9.32",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
     "babel-eslint": "^10.1.0",

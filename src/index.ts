@@ -1,4 +1,6 @@
-import express from 'express'
+import express, { Request, Response } from 'express'
+import next from 'next'
+
 import { env } from './config'
 import knex from 'knex'
 import config from './knexfile'
@@ -7,25 +9,33 @@ import service from './service'
 
 const logger = createLogger('ecoach-app')
 
-const init = async () => {
+const app = next({ dev: env.isDev })
+const handle = app.getRequestHandler()
+
+const migrate = async () => {
+  const logger = createLogger('ecoach-migrations')
   try {
-    const client = knex(config)
-    logger.info('Starting migration')
-    await client.migrate.latest()
-    logger.info('Migrated to latest DB')
-
-    const app = express()
-    app.get('/ping', (req, res) => res.send({ pong: 123 }))
-    service(app)
-
-    app.get('/*', (req, res) => res.send('Routed'))
-    app.listen(env.PORT, () => {
-      logger.info(`Listening on port ${env.PORT}`)
-    })
+    logger.info('Starting')
+    await knex(config).migrate.latest()
+    logger.info('Migrated')
   } catch (e) {
-    logger.error('Migration to latest DB failed')
+    logger.error('Error migrating')
     logger.error(e)
+    process.exit(0)
   }
 }
 
-init()
+;(async () => {
+  await Promise.all([app.prepare(), migrate()])
+  const server = express()
+
+  server.get('/ping', (req, res) => res.send({ pong: 123 }))
+  service(server)
+
+  server.get('/*', (req: Request, res: Response) => {
+    return handle(req, res)
+  })
+  server.listen(env.PORT, () => {
+    logger.info(`Listening on port ${env.PORT}`)
+  })
+})()

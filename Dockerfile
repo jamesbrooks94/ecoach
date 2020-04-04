@@ -1,5 +1,4 @@
 FROM node:latest
 COPY build .
-ENV NODE_ENV=production
 
-CMD node index.js
+CMD NODE_ENV=production node index.js

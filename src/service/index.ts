@@ -1,5 +1,5 @@
 import { Express } from 'express'
-import { postgraphile } from 'postgraphile'
+import { postgraphile, makeExtendSchemaPlugin, gql } from 'postgraphile'
 import { env } from '../config'
 import { createLogger } from './logger'
 import { plugin } from './rules'
@@ -7,7 +7,7 @@ import { getProfile, getJwksKey } from './security'
 import { IUser } from './interfaces'
 import { getTokenInfo, verifyToken } from './security/utils'
 import { IncomingMessage } from 'http'
-
+import PostGraphileConnectionFilterPlugin from 'postgraphile-plugin-connection-filter'
 const logger = createLogger('ecoach-service')
 
 const AUTHENTICATION_FAILED = 'Authentication failed'
@@ -53,6 +53,31 @@ export const getUserInfo = async (req: IncomingMessage): Promise<IUser> => {
   return profile
 }
 
+const extend = makeExtendSchemaPlugin((build) => {
+  const { pgSql: sql, inflection } = build
+  console.log(sql)
+
+  return {
+    typeDefs: gql`
+      type UserInfo {
+        id: String!
+        name: String!
+      }
+      extend type Query {
+        me: UserInfo
+      }
+    `,
+    resolvers: {
+      Query: {
+        me: {
+          resolve(parent, args, { user }, resolveInfo) {
+            return user
+          },
+        },
+      },
+    },
+  }
+})
 export default (app: Express) => {
   app.use(
     postgraphile(env.DB_CONNECTION, 'public', {
@@ -62,17 +87,18 @@ export default (app: Express) => {
           console.log(user)
           return { user }
         } catch (e) {
-          console.log(e)
+          // console.log(e)
         }
         return {
           user: 'james',
         }
       },
-      watchPg: env.isDev,
-      graphiql: env.isDev,
-      enhanceGraphiql: env.isDev,
+      watchPg: true,
+      graphiql: true,
+      enhanceGraphiql: true,
       graphiqlRoute: '/graphiql',
-      appendPlugins: [plugin],
+      disableQueryLog: true,
+      appendPlugins: [PostGraphileConnectionFilterPlugin, extend, plugin],
     })
   )
   return app
