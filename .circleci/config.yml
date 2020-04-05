@@ -4,7 +4,7 @@ orbs:
   docker: circleci/docker@1.0.1
 
 jobs:
-  docker-build:
+  docker-build-tools:
     executor:
       name: docker/docker
       tag: '3.6'
@@ -25,6 +25,4 @@ workflows:
   build-and-test:
     jobs:
       - build-and-test
-      - docker/publish:
-        deploy: false
-        image: $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
+      - docker-build-tools
