@@ -6,17 +6,17 @@
   "license": "MIT",
   "scripts": {
     "build:server": "tsc --project tsconfig.server.json",
-    "build:next": "next build",
-    "build": "rm -rf build && rm -rf .next && npm run build:next && npm run build:server",
+    "build": "rm -rf build && rm -rf .next && next build && npm run build:server",
     "start": "NODE_ENV=production node build/index.js",
-    "dev": "ts-node --project tsconfig.server.json src/index.ts",
+    "dev": "concurrently \"next dev\" \"nodemon\"",
     "db:new": "knex --knexfile src/knexfile.ts -x ts migrate:make",
     "db:down": "knex --knexfile src/knexfile.ts migrate:down",
-    "heroku:push": "yarn build && heroku container:push web -a e-coach-staging",
+    "heroku:push": "heroku container:push web -a e-coach-staging",
     "heroku:deploy": "heroku container:release web -a e-coach-staging"
   },
   "dependencies": {
     "auth0": "^2.24.0",
+    "concurrently": "^5.1.0",
     "dotenv": "^8.2.0",
     "envalid": "^6.0.1",
     "express": "^4.17.1",
@@ -32,6 +32,7 @@
     "postgraphile-plugin-connection-filter": "^1.1.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "typescript": "^3.8.3",
     "winston": "^3.2.1"
   },
   "devDependencies": {
@@ -46,7 +47,6 @@
     "eslint-plugin-prettier": "^3.1.2",
     "nodemon": "^2.0.2",
     "prettier": "^2.0.2",
-    "ts-node": "^8.8.1",
-    "typescript": "^3.8.3"
+    "ts-node": "^8.8.1"
   }
 }

@@ -21,7 +21,7 @@ const migrate = async () => {
   } catch (e) {
     logger.error('Error migrating')
     logger.error(e)
-    process.exit(0)
+    // process.exit(1)
   }
 }
 
