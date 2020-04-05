@@ -49,10 +49,10 @@ jobs:
             docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY
             registry.heroku.com
       - run:
-          name: 'Deploy to heroku'
-          command: >
-            npm run heroku:deploy
-            npm run heroku:push
+          name: Deploy Heroku Docker Container
+          command: |
+            heroku container:push web -a e-coach-staging
+            heroku container:release web -a e-coach-staging
 workflows:
   build_and_test:
     jobs:
