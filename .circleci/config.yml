@@ -4,6 +4,14 @@ orbs:
   docker: circleci/docker@1.0.1
 
 jobs:
+  docker-build:
+    executor:
+      name: docker/docker
+      tag: '3.6'
+    steps:
+      - checkout
+      - docker/install-docker-tools
+
   build-and-test:
     executor:
       name: node/default
