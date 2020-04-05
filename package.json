@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "build:server": "tsc --project tsconfig.server.json",
-    "build": "rm -rf build && rm -rf .next && next build && npm run build:server",
+    "build:next": "next build",
+    "build": "rm -rf build && rm -rf .next && yarn build:next && yarn build:server",
     "start": "NODE_ENV=production node build/index.js",
     "dev": "concurrently \"next dev\" \"nodemon\"",
     "db:new": "knex --knexfile src/knexfile.ts -x ts migrate:make",
