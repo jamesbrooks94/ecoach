@@ -29,11 +29,8 @@ jobs:
             - run: yarn install
             - run: yarn build
 workflows:
-  build-and-test:
+  build:
     jobs:
       - build-and-test
       - docker-build-tools
-      - build-docker-image:
-          - requires:
-              - build-and-test
-              - docker-build-tools
+      - build-docker-image
