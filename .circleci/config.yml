@@ -60,7 +60,6 @@ jobs:
       #   command: >
       #     docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY
       #     registry.heroku.com
-
 workflows:
   build_and_test:
     jobs:
