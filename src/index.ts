@@ -9,7 +9,7 @@ import service from './service'
 
 const logger = createLogger('ecoach-app')
 
-const app = next({ dev: env.isDev })
+const app = next({ dev: env.isDev, conf: { env: { env } } })
 const handle = app.getRequestHandler()
 
 const migrate = async () => {
