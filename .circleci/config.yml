@@ -4,7 +4,7 @@ orbs:
   docker: circleci/docker@1.0.1
 
 jobs:
-  build:
+  build_app:
     description: 'Run build'
     executor: node/default
     steps:
@@ -23,6 +23,17 @@ jobs:
           name: Build
           command: 'yarn build'
   test:
+    description: 'Test app'
+    executor: node/default
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-npm-deps-{{ checksum "yarn.lock" }}
+      - run:
+          name: Test
+          command: 'yarn test'
+  build_docker:
     description: 'Build docker image'
     executor: docker/machine
     steps:
@@ -34,7 +45,10 @@ jobs:
 workflows:
   build_and_test:
     jobs:
-      - build
-      - test:
+      - build_app
+      - build_docker:
           requires:
-            - build
+            - build_app
+          filters:
+            branches:
+              only: master
