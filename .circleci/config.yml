@@ -4,33 +4,34 @@ orbs:
   docker: circleci/docker@1.0.1
 
 jobs:
-  build-docker-image:
-    executor: docker/machine
-    steps:
-      - checkout
-      - docker/check
-      - docker/build:
-          image: $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
-  docker-build-tools:
-    executor:
-      name: docker/docker
-      tag: '3.6'
-    steps:
-      - checkout
-      - docker/install-docker-tools
-
-  build-and-test:
-    executor:
-      name: node/default
-    steps:
-      - checkout
-      - node/with-cache:
-          steps:
-            - run: yarn install
-            - run: yarn build
-workflows:
   build:
+    executor: node/default
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install npm wee
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+      - run:
+          name: Build
+          command: 'yarn build'
+  test:
+    executor: node/default
+    steps:
+      - checkout
+      - run:
+          name: Build
+          command: 'yarn build'
+
+workflows:
+  build_and_test:
     jobs:
-      - build-and-test
-      - docker-build-tools
-      - build-docker-image
+      - build
+      - test:
+          requires:
+            - build
