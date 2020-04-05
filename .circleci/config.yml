@@ -17,8 +17,6 @@ workflows:
   build-and-test:
     jobs:
       - build-and-test
-      build-and-publish-docker-image:
-        jobs:
-          - docker/publish:
-            deploy: false
-              image: $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
+      - docker/publish:
+        deploy: false
+        image: $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
