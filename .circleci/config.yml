@@ -5,6 +5,7 @@ orbs:
 
 jobs:
   build:
+    description: 'Run build'
     executor: node/default
     steps:
       - checkout
@@ -12,7 +13,7 @@ jobs:
           key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
           name: Install dependencies
-          command: npm install
+          command: yarn install
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
@@ -21,6 +22,7 @@ jobs:
           name: Build
           command: 'yarn build'
   test:
+    description: 'Build docker image'
     executor: docker/machine
     steps:
       - checkout
