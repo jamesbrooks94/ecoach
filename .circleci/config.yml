@@ -1,17 +1,58 @@
 version: 2.1
 orbs:
   node: circleci/node@1.1.6
+  docker: circleci/docker@1.0.1
+
 jobs:
-  build-and-test:
-    executor:
-      name: node/default
+  build_app:
+    description: 'Run build'
+    executor: node/default
     steps:
       - checkout
-      - node/with-cache:
-          steps:
-            - run: yarn install
-            - run: yarn build
+      - restore_cache:
+          keys:
+            - v1-npm-deps-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install dependencies
+          command: yarn install
+      - save_cache:
+          key: v1-npm-deps-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+      - run:
+          name: Build
+          command: 'yarn build'
+  test:
+    description: 'Test app'
+    executor: node/default
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-npm-deps-{{ checksum "yarn.lock" }}
+      - run:
+          name: Test
+          command: 'yarn test'
+  build_docker:
+    description: 'Build docker image'
+    executor: docker/machine
+    steps:
+      - checkout
+      - run:
+          name: Build
+          command: 'docker build -t ecoach .'
+
 workflows:
-  build-and-test:
+  build_and_test:
     jobs:
-      - build-and-test
+      - build_app
+      - test:
+          requires:
+            - build_app
+      - build_docker:
+          requires:
+            - build_app
+            - test
+          filters:
+            branches:
+              only: master

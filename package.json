@@ -5,14 +5,16 @@
   "author": "James Brooks <james@brookode.uk>",
   "license": "MIT",
   "scripts": {
+    "build:next": "next build",
     "build:server": "tsc --project tsconfig.server.json",
-    "build": "rm -rf build && rm -rf .next && next build && npm run build:server",
-    "start": "NODE_ENV=production node build/index.js",
-    "dev": "concurrently \"next dev\" \"nodemon\"",
-    "db:new": "knex --knexfile src/knexfile.ts -x ts migrate:make",
+    "build": "rm -rf build && rm -rf .next && yarn build:next && yarn build:server",
     "db:down": "knex --knexfile src/knexfile.ts migrate:down",
+    "db:new": "knex --knexfile src/knexfile.ts -x ts migrate:make",
+    "dev": "concurrently \"next dev\" \"nodemon\"",
+    "heroku:deploy": "heroku container:release web -a e-coach-staging",
     "heroku:push": "heroku container:push web -a e-coach-staging",
-    "heroku:deploy": "heroku container:release web -a e-coach-staging"
+    "start": "NODE_ENV=production node build/index.js",
+    "test": "exit 0"
   },
   "dependencies": {
     "auth0": "^2.24.0",
