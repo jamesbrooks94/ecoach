@@ -50,15 +50,20 @@ jobs:
             else
               echo "Heroku is already installed. No operation was performed."
             fi
+      - deploy-to-heroku/install_dependencies
       - run:
           name: Build
           command: 'docker build -t ecoach .'
-      - deploy-to-heroku/install_dependencies
-      # - run:
-      #   name: Login into Heroku Docker Repository
-      #   command: >
-      #     docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY
-      #     registry.heroku.com
+      - run:
+          name: 'Heroku login'
+          command: >
+            docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY
+            registry.heroku.com
+      - run:
+          name: 'Deploy to heroku'
+          command: >
+            yarn heroku:deploy
+            yarn heroku:push
 workflows:
   build_and_test:
     jobs:
