@@ -9,6 +9,9 @@ jobs:
     executor: node/default
     steps:
       - checkout
+      - run:
+          name: 'List files'
+          command: 'ls -al'
       - restore_cache:
           keys:
             - v1-npm-deps-{{ checksum "package-lock.json" }}
