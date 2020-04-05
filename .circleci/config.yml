@@ -2,6 +2,7 @@ version: 2.1
 orbs:
   node: circleci/node@1.1.6
   docker: circleci/docker@1.0.1
+  deploy-to-heroku: rise/deploy-to-heroku@0.0.6
 
 jobs:
   build_app:
@@ -38,9 +39,27 @@ jobs:
     executor: docker/machine
     steps:
       - checkout
+      - setup_remote_docker
+      - restore_cache:
+          keys:
+            - v1-npm-deps-{{ checksum "yarn.lock" }}
+      - run:
+          name: 'Install Heroku CLI, if necessary'
+          command: |
+            if [[ $(command -v heroku) == "" ]]; then
+              curl https://cli-assets.heroku.com/install.sh | sh
+            else
+              echo "Heroku is already installed. No operation was performed."
+            fi
       - run:
           name: Build
           command: 'docker build -t ecoach .'
+      - deploy-to-heroku/install_dependencies
+      # - run:
+      #   name: Login into Heroku Docker Repository
+      #   command: >
+      #     docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY
+      #     registry.heroku.com
 
 workflows:
   build_and_test:
@@ -51,8 +70,8 @@ workflows:
             - build_app
       - build_docker:
           requires:
-            - build_app
             - test
-          filters:
-            branches:
-              only: master
+            - build_app
+          # filters:
+          #   branches:
+          #     only: master
