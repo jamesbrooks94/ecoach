@@ -42,18 +42,7 @@ jobs:
       - restore_cache:
           keys:
             - v1-npm-deps-{{ checksum "yarn.lock" }}
-      - run:
-          name: 'Install Heroku CLI, if necessary'
-          command: |
-            if [[ $(command -v heroku) == "" ]]; then
-              curl https://cli-assets.heroku.com/install.sh | sh
-            else
-              echo "Heroku is already installed. No operation was performed."
-            fi
       - deploy-to-heroku/install_dependencies
-      - run:
-          name: Build
-          command: 'docker build -t ecoach .'
       - run:
           name: 'Heroku login'
           command: >
@@ -62,8 +51,8 @@ jobs:
       - run:
           name: 'Deploy to heroku'
           command: >
-            yarn heroku:deploy
-            yarn heroku:push
+            npm run heroku:deploy
+            npm run heroku:push
 workflows:
   build_and_test:
     jobs:
