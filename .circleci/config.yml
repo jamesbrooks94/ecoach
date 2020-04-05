@@ -4,14 +4,6 @@ orbs:
   docker: circleci/docker@1.0.1
 
 jobs:
-  docker:
-    executor: docker/machine
-    steps:
-      - checkout
-      - docker/check
-      - docker/build:
-        image: $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
-
   build-and-test:
     executor:
       name: node/default
@@ -25,4 +17,8 @@ workflows:
   build-and-test:
     jobs:
       - build-and-test
-      - docker
+      build-and-publish-docker-image:
+        jobs:
+          - docker/publish:
+            deploy: false
+              image: $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
