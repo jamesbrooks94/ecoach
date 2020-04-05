@@ -14,12 +14,12 @@ jobs:
           command: 'ls -al'
       - restore_cache:
           keys:
-            - v1-npm-deps-{{ checksum "package-lock.json" }}
+            - v1-npm-deps-{{ checksum "yarn-lock.json" }}
       - run:
           name: Install dependencies
           command: yarn install
       - save_cache:
-          key: v1-npm-deps-{{ checksum "package-lock.json" }}
+          key: v1-npm-deps-{{ checksum "yarn-lock.json" }}
           paths:
             - node_modules
       - run:
