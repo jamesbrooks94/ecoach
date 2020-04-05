@@ -52,10 +52,13 @@ jobs:
               echo "Heroku is already installed. No operation was performed."
             fi
       - run:
-          name: 'Heroku login and deploy'
-          command: |
+          name: 'Heroku login'
+          command: >
             docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY
             registry.heroku.com
+      - run:
+          name: 'Deploy to Heroku'
+          command: |
             heroku container:push web -a e-coach-staging
             heroku container:release web -a e-coach-staging
 workflows:
