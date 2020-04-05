@@ -34,14 +34,32 @@ jobs:
           name: Test
           command: 'yarn test'
   build_docker:
-    description: 'Build docker image'
+    description: 'Build and deploy to Heroku'
     executor: docker/machine
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - v1-npm-deps-{{ checksum "yarn.lock" }}
       - run:
-          name: Build
-          command: 'docker build -t ecoach .'
-
+          name: 'Install Heroku CLI'
+          command: |
+            if [[ $(command -v heroku) == "" ]]; then
+              curl https://cli-assets.heroku.com/install.sh | sh
+            else
+              sudo apt update && sudo apt install heroku
+              echo "Heroku is already installed. No operation was performed."
+            fi
+      - run:
+          name: 'Heroku login'
+          command: >
+            docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY
+            registry.heroku.com
+      - run:
+          name: 'Deploy to Heroku'
+          command: |
+            heroku container:push web -a e-coach-staging
+            heroku container:release web -a e-coach-staging
 workflows:
   build_and_test:
     jobs:
@@ -51,8 +69,8 @@ workflows:
             - build_app
       - build_docker:
           requires:
-            - build_app
             - test
+            - build_app
           filters:
             branches:
               only: master
