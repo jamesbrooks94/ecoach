@@ -39,7 +39,6 @@ jobs:
     executor: docker/machine
     steps:
       - checkout
-      - setup_remote_docker
       - restore_cache:
           keys:
             - v1-npm-deps-{{ checksum "yarn.lock" }}
