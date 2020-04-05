@@ -71,6 +71,6 @@ workflows:
           requires:
             - test
             - build_app
-          filters:
-            branches:
-              only: master
+          # filters:
+          #   branches:
+          #     only: master
