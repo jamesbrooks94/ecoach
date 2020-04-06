@@ -47,13 +47,16 @@ jobs:
               sudo apt update && sudo apt install heroku
               echo "Heroku is already installed. No operation was performed."
             fi
+      # - run:
+      #     name: 'Heroku login'
+      #     command: >
+      #       docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY
+      #       registry.heroku.com
       - run:
-          name: 'Heroku login'
-          command: >
-            docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY
-            registry.heroku.com
-            heroku git:remote -a e-coach-staging
-            git push heroku master
+          name: 'Push to Heroku'
+          command: |
+            git remote add heroku https://git.heroku.com/e-coach-staging.git
+            git push heroku master --force
 
   build_docker:
     description: 'Build and deploy to Heroku'
