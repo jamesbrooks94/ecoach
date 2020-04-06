@@ -11,7 +11,7 @@ jobs:
       - checkout
       - heroku/install
       - heroku/deploy-via-git
-  build_app:
+  build:
     description: 'Run build'
     executor: node/default
     steps:
@@ -40,79 +40,63 @@ jobs:
       - run:
           name: Test
           command: 'yarn test'
-  push_heroku:
-    description: 'Push to Heroku'
-    executor: node/default
-    steps:
-      - checkout
-      - run:
-          name: 'Install Heroku CLI'
-          command: |
-            if [[ $(command -v heroku) == "" ]]; then
-              curl https://cli-assets.heroku.com/install.sh | sh
-            else
-              sudo apt update && sudo apt install heroku
-              echo "Heroku is already installed. No operation was performed."
-            fi
-      # - run:
-      #     name: 'Heroku login'
-      #     command: >
-      #       docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY
-      #       registry.heroku.com
-      - run:
-          name: 'Push to Heroku'
-          command: |
-            git remote add heroku https://git.heroku.com/e-coach-staging.git
-            git push heroku master --force
-
-  build_docker:
-    description: 'Build and deploy to Heroku'
-    executor: docker/machine
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-npm-deps-{{ checksum "yarn.lock" }}
-      - run:
-          name: 'Install Heroku CLI'
-          command: |
-            if [[ $(command -v heroku) == "" ]]; then
-              curl https://cli-assets.heroku.com/install.sh | sh
-            else
-              sudo apt update && sudo apt install heroku
-              echo "Heroku is already installed. No operation was performed."
-            fi
-      - run:
-          name: 'Heroku login'
-          command: >
-            docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY
-            registry.heroku.com
-      - run:
-          name: 'Deploy to Heroku'
-          command: |
-            heroku container:push web -a e-coach-staging
-            heroku container:release web -a e-coach-staging
+  # push_heroku:
+  #   description: 'Push to Heroku'
+  #   executor: node/default
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: 'Install Heroku CLI'
+  #         command: |
+  #           if [[ $(command -v heroku) == "" ]]; then
+  #             curl https://cli-assets.heroku.com/install.sh | sh
+  #           else
+  #             sudo apt update && sudo apt install heroku
+  #             echo "Heroku is already installed. No operation was performed."
+  #           fi
+  #     - run:
+  #         name: 'Push to Heroku'
+  #         command: |
+  #           git remote add heroku https://git.heroku.com/e-coach-staging.git
+  #           git push heroku master --force
+  # build_docker:
+  #   description: 'Build and deploy to Heroku'
+  #   executor: docker/machine
+  #   steps:
+  #     - checkout
+  #     - restore_cache:
+  #         keys:
+  #           - v1-npm-deps-{{ checksum "yarn.lock" }}
+  #     - run:
+  #         name: 'Install Heroku CLI'
+  #         command: |
+  #           if [[ $(command -v heroku) == "" ]]; then
+  #             curl https://cli-assets.heroku.com/install.sh | sh
+  #           else
+  #             sudo apt update && sudo apt install heroku
+  #             echo "Heroku is already installed. No operation was performed."
+  #           fi
+  #     - run:
+  #         name: 'Heroku login'
+  #         command: >
+  #           docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY
+  #           registry.heroku.com
+  #     - run:
+  #         name: 'Deploy to Heroku'
+  #         command: |
+  #           heroku container:push web -a e-coach-staging
+  #           heroku container:release web -a e-coach-staging
 workflows:
   build_and_test:
     jobs:
-      - build_app
-      - deploy:
-          requires:
-            - build_app
+      - build
       - test:
           requires:
-            - build_app
-      - push_heroku:
+            - build
+      - deploy:
           requires:
             - test
-            - build_app
-          # filters:
-          #   branches:
-          #     only: master
-      # - build_docker:
-      #     requires:
-      #       - test
-      #       - build_app
-      #     filters:
-      #       branches:
-      #         only: master
+            - build
+          filters:
+            branches:
+              only: master
