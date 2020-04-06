@@ -25,5 +25,3 @@ export const env = cleanEnv(
     },
   }
 )
-
-process.env = env

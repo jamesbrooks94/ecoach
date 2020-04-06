@@ -5,22 +5,47 @@
     "node": true,
     "jest": true
   },
-  "extends": ["plugin:@typescript-eslint/recommended", "eslint:recommended", "prettier"],
+  "extends": ["standard", "prettier", "react-app", "eslint:recommended", "plugin:import/recommended"],
   "parser": "babel-eslint",
-  "plugins": ["prettier", "jest"],
+  "plugins": ["prettier", "jest", "import", "react"],
   "rules": {
+    "no-console": "error",
     "strict": [2, "never"],
+    "react/jsx-uses-react": 2,
+    "react/jsx-uses-vars": 2,
+    "react/react-in-jsx-scope": 2,
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": ["**/*.test.js", "**/src/**"]
+      }
+    ],
     "prefer-const": "error",
-    "no-unused-vars": "off",
+    "no-unused-vars": "error",
     "import/unambiguous": "off",
     "import/prefer-default-export": "off",
     "linebreak-style": "off",
     "prettier/prettier": "error",
     "import/no-unresolved": "off",
+    "import/order": [
+      "error",
+      {
+        "groups": ["external", "builtin", "parent", "sibling", "index"]
+      }
+    ],
+    "no-shadow": "error",
     "jest/no-focused-tests": "error",
     "jest/no-identical-title": "error",
     "jest/valid-expect": "error",
-    "@typescript-eslint/no-var-requires": "off",
-    "@typescript-eslint/explicit-function-return-type": "off"
+    "id-blacklist": [
+      "error",
+      "injectIntl",
+      "WithDelayedQuery",
+      "WithMutationLoadingState",
+      "WithPageError",
+      "WithPageLoading",
+      "WithQueryLoadingState",
+      "withStyles"
+    ]
   }
 }
