@@ -33,6 +33,28 @@ jobs:
       - run:
           name: Test
           command: 'yarn test'
+  push_heroku:
+    description: 'Push to Heroku'
+    executor: node/default
+    steps:
+      - checkout
+      - run:
+          name: 'Install Heroku CLI'
+          command: |
+            if [[ $(command -v heroku) == "" ]]; then
+              curl https://cli-assets.heroku.com/install.sh | sh
+            else
+              sudo apt update && sudo apt install heroku
+              echo "Heroku is already installed. No operation was performed."
+            fi
+      - run:
+          name: 'Heroku login'
+          command: >
+            docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY
+            registry.heroku.com
+            heroku git:remote -a e-coach-staging
+            git push heroku master
+
   build_docker:
     description: 'Build and deploy to Heroku'
     executor: docker/machine
@@ -67,10 +89,17 @@ workflows:
       - test:
           requires:
             - build_app
-      - build_docker:
+      - push_heroku:
           requires:
             - test
             - build_app
-          filters:
-            branches:
-              only: master
+          # filters:
+          #   branches:
+          #     only: master
+      # - build_docker:
+      #     requires:
+      #       - test
+      #       - build_app
+      #     filters:
+      #       branches:
+      #         only: master
