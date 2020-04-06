@@ -15,5 +15,5 @@ const migrate = async () => {
     // process.exit(1)
   }
 }
-migrate()
+// migrate()
 server(__dirname)
