@@ -1,0 +1,235 @@
+[
+  {
+    "data": {
+      "allNotifications": {
+        "edges": [],
+        "__typename": "NotificationsConnection"
+      }
+    }
+  },
+  {
+    "data": {
+      "tasks": [
+        {
+          "jobcardId": "JCD114141",
+          "jobTitle": "NNO Clean",
+          "jobNumber": "A*X001",
+          "completed": true,
+          "plannedTime": "2021-06-26T17:00:00.000Z",
+          "bookedTime": "2021-06-26T13:00:00.000Z",
+          "__typename": "task"
+        },
+        {
+          "jobcardId": "JCD114140",
+          "jobTitle": "NNO Clean",
+          "jobNumber": "A*X001",
+          "completed": false,
+          "plannedTime": "2021-06-26T17:00:00.000Z",
+          "bookedTime": "2021-06-26T13:00:00.000Z",
+          "__typename": "task"
+        },
+        {
+          "jobcardId": "JCD114143",
+          "jobTitle": "NNO Clean",
+          "jobNumber": "A*X001",
+          "completed": true,
+          "plannedTime": "2021-06-26T17:00:00.000Z",
+          "bookedTime": "2021-06-26T13:00:00.000Z",
+          "__typename": "task"
+        },
+        {
+          "jobcardId": "JCD114142",
+          "jobTitle": "NNO Clean",
+          "jobNumber": "A*X001",
+          "completed": false,
+          "plannedTime": "2021-06-26T17:00:00.000Z",
+          "bookedTime": "2021-06-26T13:00:00.000Z",
+          "__typename": "task"
+        }
+      ]
+    }
+  },
+  {
+    "data": {
+      "locationSet": {
+        "id": 918,
+        "set": {
+          "id": 6,
+          "name": "3229 & 3230",
+          "__typename": "Set"
+        },
+        "location": {
+          "id": 2,
+          "name": "Road 1",
+          "__typename": "Location"
+        },
+        "teamMembers": {
+          "edges": [
+            {
+              "node": {
+                "id": 1,
+                "team": {
+                  "id": 1,
+                  "name": "SSA 1",
+                  "teamMembers": {
+                    "edges": [],
+                    "__typename": "TeamMembersConnection"
+                  },
+                  "__typename": "Team"
+                },
+                "__typename": "LocationSetTeam"
+              },
+              "__typename": "LocationSetTeamsEdge"
+            },
+            {
+              "node": {
+                "id": 2,
+                "team": {
+                  "id": 2,
+                  "name": "SSA 2",
+                  "teamMembers": {
+                    "edges": [],
+                    "__typename": "TeamMembersConnection"
+                  },
+                  "__typename": "Team"
+                },
+                "__typename": "LocationSetTeam"
+              },
+              "__typename": "LocationSetTeamsEdge"
+            },
+            {
+              "node": {
+                "id": 3,
+                "team": {
+                  "id": 36,
+                  "name": "SSB 1",
+                  "teamMembers": {
+                    "edges": [],
+                    "__typename": "TeamMembersConnection"
+                  },
+                  "__typename": "Team"
+                },
+                "__typename": "LocationSetTeam"
+              },
+              "__typename": "LocationSetTeamsEdge"
+            },
+            {
+              "node": {
+                "id": 4,
+                "team": {
+                  "id": 34,
+                  "name": "SSC 1",
+                  "teamMembers": {
+                    "edges": [],
+                    "__typename": "TeamMembersConnection"
+                  },
+                  "__typename": "Team"
+                },
+                "__typename": "LocationSetTeam"
+              },
+              "__typename": "LocationSetTeamsEdge"
+            },
+            {
+              "node": {
+                "id": 5,
+                "team": {
+                  "id": 38,
+                  "name": "SSD 1",
+                  "teamMembers": {
+                    "edges": [],
+                    "__typename": "TeamMembersConnection"
+                  },
+                  "__typename": "Team"
+                },
+                "__typename": "LocationSetTeam"
+              },
+              "__typename": "LocationSetTeamsEdge"
+            },
+            {
+              "node": {
+                "id": 6,
+                "team": {
+                  "id": 37,
+                  "name": "SSB 2",
+                  "teamMembers": {
+                    "edges": [],
+                    "__typename": "TeamMembersConnection"
+                  },
+                  "__typename": "Team"
+                },
+                "__typename": "LocationSetTeam"
+              },
+              "__typename": "LocationSetTeamsEdge"
+            },
+            {
+              "node": {
+                "id": 7,
+                "team": {
+                  "id": 39,
+                  "name": "SSD 2",
+                  "teamMembers": {
+                    "edges": [],
+                    "__typename": "TeamMembersConnection"
+                  },
+                  "__typename": "Team"
+                },
+                "__typename": "LocationSetTeam"
+              },
+              "__typename": "LocationSetTeamsEdge"
+            },
+            {
+              "node": {
+                "id": 8,
+                "team": {
+                  "id": 35,
+                  "name": "SSC 2",
+                  "teamMembers": {
+                    "edges": [],
+                    "__typename": "TeamMembersConnection"
+                  },
+                  "__typename": "Team"
+                },
+                "__typename": "LocationSetTeam"
+              },
+              "__typename": "LocationSetTeamsEdge"
+            },
+            {
+              "node": {
+                "id": 9,
+                "team": {
+                  "id": 40,
+                  "name": "PNB",
+                  "teamMembers": {
+                    "edges": [],
+                    "__typename": "TeamMembersConnection"
+                  },
+                  "__typename": "Team"
+                },
+                "__typename": "LocationSetTeam"
+              },
+              "__typename": "LocationSetTeamsEdge"
+            },
+            {
+              "node": {
+                "id": 10,
+                "team": {
+                  "id": 41,
+                  "name": "PND",
+                  "teamMembers": {
+                    "edges": [],
+                    "__typename": "TeamMembersConnection"
+                  },
+                  "__typename": "Team"
+                },
+                "__typename": "LocationSetTeam"
+              },
+              "__typename": "LocationSetTeamsEdge"
+            }
+          ],
+          "__typename": "LocationSetTeamsConnection"
+        },
+        "__typename": "LocationSet"
+      }
+    }
+  }
+]

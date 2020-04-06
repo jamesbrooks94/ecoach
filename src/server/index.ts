@@ -7,14 +7,59 @@ import { postgraphile, makeExtendSchemaPlugin, gql } from 'postgraphile'
 import { plugin } from './rules'
 import { env } from '../config'
 import { IUser } from './interfaces'
+import { IncomingMessage } from 'http'
 const PostGraphileConnectionFilterPlugin = require('postgraphile-plugin-connection-filter')
+import { getProfile } from './security'
+import { getTokenInfo, verifyToken } from './security/utils'
+import { getJwksKey } from './security'
+
+const AUTHENTICATION_FAILED = 'Authentication failed'
+const NO_BEARER_TOKEN: string = `${AUTHENTICATION_FAILED}, no Bearer token provided in request`
+const TOKEN_FAILED_VALIDATION: string = `${AUTHENTICATION_FAILED}, token failed validation`
+const ERROR_GETTING_PROFILE: string = `${AUTHENTICATION_FAILED}, Error getting profile`
+const PROFILE_NOT_FOUND: string = `${AUTHENTICATION_FAILED}, profile not found`
+
+const getUser = async (req: IncomingMessage) => {
+  const {
+    headers: { authorization },
+  } = req
+  let profile: IUser
+
+  if (!authorization || !authorization.startsWith('Bearer')) {
+    throw new Error(NO_BEARER_TOKEN)
+  }
+  const token = authorization.substr(7)
+  const { kid } = getTokenInfo(token)
+
+  const jwksKey = await getJwksKey(kid)
+
+  try {
+    await verifyToken(token, jwksKey)
+  } catch (err) {
+    throw new Error(TOKEN_FAILED_VALIDATION)
+  }
+  try {
+    console.log('token', token)
+    profile = await getProfile(token)
+    if (!profile) {
+      throw new Error(ERROR_GETTING_PROFILE)
+    }
+  } catch (err) {
+    console.log(err)
+    throw new Error(PROFILE_NOT_FOUND)
+  }
+  return profile
+}
 
 const extend = makeExtendSchemaPlugin(build => {
   return {
     typeDefs: gql`
       type UserInfo {
         id: String!
-        firstName: String!
+        name: String!
+        surname: String!
+        email: String!
+        roles: [String!]
       }
       extend type Query {
         me: UserInfo
@@ -24,8 +69,8 @@ const extend = makeExtendSchemaPlugin(build => {
       Query: {
         me: {
           resolve(_parent, _args, { user }) {
+            console.log(user)
             if (user) return user
-            return { id: 'Not set', name: 'Not set' }
           },
         },
       },
@@ -36,7 +81,7 @@ const extend = makeExtendSchemaPlugin(build => {
 const server = (appPath: string) => {
   const app = express()
 
-  const { REACT_APP_AUTH_DOMAIN, REACT_APP_AUTH_CLIENT_ID, REACT_APP_AUDIENCE } = process.env
+  const { AUTH_DOMAIN, AUTH_CLIENT_ID, AUDIENCE } = process.env
 
   app.use(redirectToHTTPS([/localhost:(\d{4})/], [/\/insecure/], 301))
 
@@ -62,11 +107,15 @@ const server = (appPath: string) => {
       additionalGraphQLContextFromRequest: async (req): Promise<any> => {
         const user: IUser = {
           id: 'Not set properly',
-          firstName: 'James',
-          surname: 'James',
+          name: 'James',
           email: 'james@dev.io',
-          permissions: [],
           roles: [],
+        }
+        try {
+          const user2 = await getUser(req)
+          return { user: user2 }
+        } catch (err) {
+          console.log(err)
         }
         return {
           user,
@@ -83,9 +132,9 @@ const server = (appPath: string) => {
 
   app.get('/config', (_req, res) => {
     res.json({
-      REACT_APP_AUTH_DOMAIN,
-      REACT_APP_AUTH_CLIENT_ID,
-      REACT_APP_AUDIENCE,
+      AUTH_DOMAIN,
+      AUTH_CLIENT_ID,
+      AUDIENCE,
     })
   })
 
