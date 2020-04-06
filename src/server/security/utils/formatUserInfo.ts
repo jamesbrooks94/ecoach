@@ -1,6 +1,6 @@
 import { IUser } from '../../interfaces'
 
-export const formatUserInfo = ({ sub, name, ...props }): IUser => ({
+export const formatUserInfo = ({ sub, name, ...props }: any): IUser => ({
   email: props['https://depot.com/email'] || name,
   firstName: '',
   id: sub,

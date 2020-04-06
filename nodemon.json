@@ -2,8 +2,17 @@
   "watch": ["src"],
   "verbose": true,
   "debug": true,
-  "exec": "NODE_ENV=development TS_NODE_PROJECT=tsconfig.server.json node -r ts-node/register --inspect=5050 src/index.ts",
-  "ignore": ["node_modules", "**/*.d.ts", "*.test.ts", "*.spec.ts", "fixtures/*", "test/**/*", "docs/*", "src/public"],
+  "exec": "NODE_ENV=development TS_NODE_PROJECT=tsconfig.app.json node -r ts-node/register --inspect=5050 src/server.ts",
+  "ignore": [
+    "node_modules",
+    "**/*.d.ts",
+    "*.test.ts",
+    "*.spec.ts",
+    "fixtures/*",
+    "test/**/*",
+    "docs/*",
+    "src/public"
+  ],
   "ext": "ts,gql,js",
   "inspect": true
 }
