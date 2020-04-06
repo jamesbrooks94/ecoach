@@ -5,6 +5,12 @@ orbs:
   heroku: circleci/heroku@1.0.1
 
 jobs:
+  deploy:
+    executor: heroku/default
+    steps:
+      - checkout
+      - heroku/install
+      - heroku/deploy-via-git
   build_app:
     description: 'Run build'
     executor: node/default
@@ -90,7 +96,7 @@ workflows:
   build_and_test:
     jobs:
       - build_app
-      - heroku/deploy-via-git:
+      - deploy:
           requires:
             - build_app
       - test:
