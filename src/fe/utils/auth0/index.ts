@@ -14,7 +14,7 @@ export const init = async (config: any) => {
     redirectUri: `${window.location.origin}/callback`,
     audience: config.REACT_APP_AUDIENCE,
     responseType: 'token id_token',
-    scope: 'openid profile',
+    scope: 'openid profile email',
   })
 }
 
@@ -23,7 +23,6 @@ export const isAuthenticated = () => !!accessToken
 export const login = () => auth0Client.authorize()
 
 export const handleAuthCallback = () => {
-  debugger
   if (/access_token|id_token|error/.test(window.location.hash)) {
     history.replace((window.location as any).referrer || '/')
   }

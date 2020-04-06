@@ -1,4 +1,3 @@
-export * from './applyPermissions'
 export * from './formatUserInfo'
 export * from './getName'
 export * from './getRoles'

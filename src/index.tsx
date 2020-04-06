@@ -6,7 +6,7 @@ import renderApp from './fe/renderApp'
 const bootstrap = async () => {
   const config = await getAppConfig()
   await init(config)
-  debugger
+
   handleAuthCallback()
   try {
     await checkSession()

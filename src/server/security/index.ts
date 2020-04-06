@@ -5,25 +5,13 @@ import { IUser } from '../interfaces'
 import { createLogger } from '../logger'
 
 import { env } from '../../config'
-import { getSigningKey, formatUserInfo, applyPermissions } from './utils'
+import { getSigningKey, formatUserInfo } from './utils'
 
 const logger: Logger = createLogger(`ecoach-auth`)
 
 let managementClient: ManagementClient<AppMetadata, UserMetadata>
 let authenticationClient: AuthenticationClient
 let jwksClient: JwksClient
-
-// const jwtCheck = jwt({
-//   secret: jwks.expressJwtSecret({
-//     cache: true,
-//     rateLimit: true,
-//     jwksRequestsPerMinute: 5,
-//     jwksUri: 'https://ecoach.eu.auth0.com/.well-known/jwks.json',
-//   }),
-//   audience: 'https://ecoach.dev/',
-//   issuer: 'https://ecoach.eu.auth0.com/',
-//   algorithms: ['RS256'],
-// })
 
 const { AUTH_DOMAIN, AUTH_CLIENT_ID, AUTH_CLIENT_SECRET } = env
 
@@ -62,11 +50,11 @@ export const getJwksKey = async (kid: string): Promise<string> =>
 
 export const getProfile = async (token: string): Promise<IUser> => {
   let profile = await authenticationClient.getProfile(token)
+  console.log(profile)
   logger.debug('Received user profile from Auth0')
   profile = formatUserInfo({ ...profile })
 
   if (profile && profile.email) {
-    profile = applyPermissions(profile)
   } else {
     logger.error('Cannot return profile, no valid profile with email address found', profile)
   }

@@ -10,7 +10,9 @@ import { Router } from 'react-router-dom'
 import history from './utils/history'
 import { Routes } from './pages/Routes'
 import { SnackbarProvider } from 'notistack'
-
+import Navigation from './components/Navigation'
+import { Container } from '@material-ui/core'
+import './index.css'
 const renderApp = async (config: any) => {
   initialiseConfigContext(config)
   await initialiseAuthContext()
@@ -29,7 +31,10 @@ const renderApp = async (config: any) => {
           maxSnack={3}
         >
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <Routes />
+            <Navigation />
+            <Container>
+              <Routes />
+            </Container>
           </MuiPickersUtilsProvider>
         </SnackbarProvider>
       </Router>
