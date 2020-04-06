@@ -9,10 +9,10 @@ let accessToken: string
 
 export const init = async (config: any) => {
   auth0Client = new auth0.WebAuth({
-    domain: config.REACT_APP_AUTH_DOMAIN,
-    clientID: config.REACT_APP_AUTH_CLIENT_ID,
+    domain: config.AUTH_DOMAIN,
+    clientID: config.AUTH_CLIENT_ID,
     redirectUri: `${window.location.origin}/callback`,
-    audience: config.REACT_APP_AUDIENCE,
+    audience: config.AUDIENCE,
     responseType: 'token id_token',
     scope: 'openid profile email',
   })

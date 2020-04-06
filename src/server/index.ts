@@ -81,7 +81,7 @@ const extend = makeExtendSchemaPlugin(build => {
 const server = (appPath: string) => {
   const app = express()
 
-  const { REACT_APP_AUTH_DOMAIN, REACT_APP_AUTH_CLIENT_ID, REACT_APP_AUDIENCE } = process.env
+  const { AUTH_DOMAIN, AUTH_CLIENT_ID, AUDIENCE } = process.env
 
   app.use(redirectToHTTPS([/localhost:(\d{4})/], [/\/insecure/], 301))
 
@@ -132,9 +132,9 @@ const server = (appPath: string) => {
 
   app.get('/config', (_req, res) => {
     res.json({
-      REACT_APP_AUTH_DOMAIN,
-      REACT_APP_AUTH_CLIENT_ID,
-      REACT_APP_AUDIENCE,
+      AUTH_DOMAIN,
+      AUTH_CLIENT_ID,
+      AUDIENCE,
     })
   })
 
