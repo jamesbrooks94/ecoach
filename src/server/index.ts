@@ -10,12 +10,12 @@ import { IUser } from './interfaces'
 import { IncomingMessage } from 'http'
 const PostGraphileConnectionFilterPlugin = require('postgraphile-plugin-connection-filter')
 import { getProfile } from './security'
-import { getTokenInfo, verifyToken } from './security/utils'
-import { getJwksKey } from './security'
+// import { getTokenInfo, verifyToken } from './security/utils'
+// import { getJwksKey } from './security'
 
 const AUTHENTICATION_FAILED = 'Authentication failed'
 const NO_BEARER_TOKEN: string = `${AUTHENTICATION_FAILED}, no Bearer token provided in request`
-const TOKEN_FAILED_VALIDATION: string = `${AUTHENTICATION_FAILED}, token failed validation`
+// const TOKEN_FAILED_VALIDATION: string = `${AUTHENTICATION_FAILED}, token failed validation`
 const ERROR_GETTING_PROFILE: string = `${AUTHENTICATION_FAILED}, Error getting profile`
 const PROFILE_NOT_FOUND: string = `${AUTHENTICATION_FAILED}, profile not found`
 
@@ -27,17 +27,16 @@ const getUser = async (req: IncomingMessage) => {
     throw new Error(NO_BEARER_TOKEN)
   }
   const token = authorization.substr(7)
-  const { kid } = getTokenInfo(token)
+  // const { kid } = getTokenInfo(token)
 
-  const jwksKey = await getJwksKey(kid)
+  // const jwksKey = await getJwksKey(kid)
 
+  // try {
+  //   await verifyToken(token, jwksKey)
+  // } catch (err) {
+  //   throw new Error(TOKEN_FAILED_VALIDATION)
+  // }
   try {
-    await verifyToken(token, jwksKey)
-  } catch (err) {
-    throw new Error(TOKEN_FAILED_VALIDATION)
-  }
-  try {
-    console.log('token', token)
     profile = await getProfile(token)
     if (!profile) {
       throw new Error(ERROR_GETTING_PROFILE)

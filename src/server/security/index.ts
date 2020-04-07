@@ -27,7 +27,7 @@ authenticationClient = new AuthenticationClient({ domain: AUTH_DOMAIN })
 jwksClient = createJwksClient({
   cache: true,
   rateLimit: true,
-  jwksRequestsPerMinute: 2,
+  jwksRequestsPerMinute: 1,
   jwksUri: `https://ecoach.eu.auth0.com/.well-known/jwks.json`,
 })
 
