@@ -1,18 +1,23 @@
 import React from 'react'
 import { AppBar, Toolbar, Button, Container } from '@material-ui/core'
-import { useAuthContext } from 'fe/context/auth'
 import { Link } from 'react-router-dom'
 import { logout } from 'fe/utils/auth0'
 import urls from 'fe/urls'
+import { useAuthContext } from 'fe/context/auth'
+import { GET_CURRENT_TENANT } from 'fe/queries/application'
+import { useQuery } from 'fe/utils/apollo'
+
 const Navigation = () => {
-  const x = useAuthContext()
-  console.log(x)
+  const { tenant } = useAuthContext()
+  const {
+    data: { application: { name } = { name: '' } },
+  } = useQuery(GET_CURRENT_TENANT, { variables: { tenant } }) as any
   return (
     <AppBar position="static">
       <Container>
         <Toolbar>
           <Button component={Link} to={urls.root} color="inherit">
-            E-Coach
+            E-Coach - {name}
           </Button>
           <Button component={Link} to={urls.lessons.list} color="inherit">
             Lessons

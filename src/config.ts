@@ -1,5 +1,5 @@
 import { config } from 'dotenv'
-import { cleanEnv, str, port } from 'envalid'
+import { cleanEnv, str, port, bool } from 'envalid'
 
 config()
 
@@ -12,6 +12,7 @@ export const env = cleanEnv(
     AUTH_DOMAIN: str(),
     AUTH_CLIENT_ID: str(),
     AUTH_CLIENT_SECRET: str(),
+    FORCE_RESET: bool({ default: false }),
   },
   {
     reporter: ({ errors }) => {

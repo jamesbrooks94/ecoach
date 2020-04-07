@@ -49,7 +49,7 @@ const Form: React.FC<ISimpleFormProps> = ({
       return { [FORM_ERROR]: 'form.error.generic.action' }
     } else {
       resetOnSubmit && setTimeout(form.reset)
-      redirectOnSubmit && history.push(redirectOnSubmit)
+      redirectOnSubmit && setTimeout(() => history.push(redirectOnSubmit), 500)
     }
   }
 
@@ -81,7 +81,7 @@ const Form: React.FC<ISimpleFormProps> = ({
             {children && children(formProps)}
 
             <Grid item sm={12}>
-              <Grid container justify="space-between">
+              <Grid container justify="flex-end">
                 <div>
                   {resetLabel && (
                     <Button

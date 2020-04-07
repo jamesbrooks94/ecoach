@@ -11,7 +11,8 @@
     "fixtures/*",
     "test/**/*",
     "docs/*",
-    "src/public"
+    "src/public",
+    "src/migrations"
   ],
   "ext": "ts,gql,js",
   "inspect": true

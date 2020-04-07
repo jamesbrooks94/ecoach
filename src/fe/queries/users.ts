@@ -7,6 +7,7 @@ export const ME = gql`
       name
       email
       roles
+      tenant
     }
   }
 `

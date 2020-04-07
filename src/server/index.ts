@@ -20,9 +20,7 @@ const ERROR_GETTING_PROFILE: string = `${AUTHENTICATION_FAILED}, Error getting p
 const PROFILE_NOT_FOUND: string = `${AUTHENTICATION_FAILED}, profile not found`
 
 const getUser = async (req: IncomingMessage) => {
-  const {
-    headers: { authorization },
-  } = req
+  const { authorization } = req.headers
   let profile: IUser
 
   if (!authorization || !authorization.startsWith('Bearer')) {
@@ -57,7 +55,7 @@ const extend = makeExtendSchemaPlugin(build => {
       type UserInfo {
         id: String!
         name: String!
-        surname: String!
+        tenant: Int!
         email: String!
         roles: [String!]
       }

@@ -12,15 +12,6 @@ jobs:
       - heroku/install
       - heroku/deploy-via-git:
           force: true
-
-  deploy_production:
-    executor: heroku/default
-    steps:
-      - checkout
-      - heroku/install
-      - heroku/deploy-via-git:
-          force: true
-          app-name: e-coach-production
   build:
     description: 'Run build'
     executor: node/default
@@ -60,13 +51,7 @@ workflows:
       - deploy:
           requires:
             - test
-          filters:
-            branches:
-              only: master
-      - deploy_production:
-          type: approval
-          requires:
-            - deploy
+            - build
           filters:
             branches:
               only: master

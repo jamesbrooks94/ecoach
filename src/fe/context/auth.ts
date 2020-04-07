@@ -18,7 +18,18 @@ export const initStubAuthContext = () => {
   })
 }
 
-export const useAuthContext = () => React.useContext(AuthContext)
+interface IAuthContext {
+  id: string
+  hasPermission: (permission: string) => boolean
+  hasPermissions: (permissions: string[]) => boolean
+  hasRoles: (roles: string[]) => boolean
+  email: string
+  roles: string[]
+  name: string
+  tenant: number
+}
+
+export const useAuthContext = () => React.useContext<IAuthContext>(AuthContext)
 
 export const initialiseAuthContext = async () => {
   const client = await getClient()
