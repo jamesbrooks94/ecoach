@@ -3,7 +3,6 @@ import { useQuery } from 'fe/utils/apollo'
 import { ALL_LESSONS } from 'fe/queries/lesson'
 import { Typography } from '@material-ui/core'
 import MaterialTable from 'material-table'
-import ViewColumn from '@material-ui/icons/ViewColumn'
 import history from 'fe/utils/history'
 import urls from 'fe/urls'
 

@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { FORM_ERROR } from 'final-form'
 import { Form as FinalForm } from 'react-final-form'
 import Grid from '@material-ui/core/Grid'
