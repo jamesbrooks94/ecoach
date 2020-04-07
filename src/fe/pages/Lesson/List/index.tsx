@@ -8,13 +8,22 @@ import urls from 'fe/urls'
 import { useAuthContext } from 'fe/context/auth'
 import { Link } from 'react-router-dom'
 
+interface ILessonMember {
+  id: number
+  member: {
+    id: number
+    firstName: string
+
+    surname: string
+  }
+}
 export interface ILesson {
   id: number
   name: string
   day: string
   startTime: any
   endTime: any
-  lessonMembers: any[]
+  lessonMembers: ILessonMember[]
 }
 
 interface ILessons {

@@ -9,7 +9,7 @@ import { Grid, Checkbox } from '@material-ui/core'
 import { useQuery, useMutation } from 'fe/utils/apollo'
 import { GET_USERS } from 'fe/queries/users'
 import { useAuthContext } from 'fe/context/auth'
-import { CREATE_MEMBER_LESSON } from 'fe/queries/lesson'
+import { CREATE_MEMBER_LESSON, DELETE_MEMBER_LESSON } from 'fe/queries/lesson'
 import uniq from 'lodash/uniq'
 interface IPlayerLessonProps {
   lesson: ILesson
@@ -21,6 +21,7 @@ const PlayerLessonTable: React.FC<IPlayerLessonProps> = ({ lesson, refetch }) =>
     data: { applicationById },
   }: any = useQuery(GET_USERS, { variables: { tenant } })
   const [createMemberLesson]: any = useMutation(CREATE_MEMBER_LESSON)
+  const [deleteMemberLesson]: any = useMutation(DELETE_MEMBER_LESSON)
 
   if (!applicationById) return null
 
@@ -30,14 +31,15 @@ const PlayerLessonTable: React.FC<IPlayerLessonProps> = ({ lesson, refetch }) =>
       value: i.id,
     })) || []
   const ids = uniq(lesson.lessonMembers.map(i => i.member.id))
-  console.log(ids)
-  // console.log(lesson.lessonMembers)
 
   const onSubmit = async (variables: { players: number[] }) => {
-    console.log(variables)
+    console.log('variables', variables)
     const playersToCreate = variables.players.filter(p => !ids.includes(p))
-    const playersToRemain = variables.players.filter(p => ids.includes(p))
-    console.log(playersToCreate, playersToRemain)
+    const playersToRemove = lesson.lessonMembers.reduce(
+      (acc, curr) => (variables.players.includes(curr.member.id) ? acc : [...acc, curr.id]),
+      [] as number[]
+    )
+    console.log(playersToRemove)
     await Promise.all([
       ...playersToCreate.map((player: number) =>
         createMemberLesson({
@@ -47,6 +49,7 @@ const PlayerLessonTable: React.FC<IPlayerLessonProps> = ({ lesson, refetch }) =>
           },
         })
       ),
+      ...playersToRemove.map(player => deleteMemberLesson({ variables: { id: player } })),
     ])
     refetch()
 
@@ -86,7 +89,7 @@ const PlayerLessonTable: React.FC<IPlayerLessonProps> = ({ lesson, refetch }) =>
         },
       ]
     : undefined
-  const columns = [{ title: 'name', field: 'member.fullName' }]
+  const columns = [{ title: 'Name', field: 'member.fullName' }]
   return (
     <>
       <MaterialTable
