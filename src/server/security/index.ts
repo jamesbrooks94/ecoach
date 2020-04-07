@@ -7,7 +7,7 @@ import { createLogger } from '../logger'
 import { env } from '../../config'
 import { getSigningKey, formatUserInfo } from './utils'
 
-const logger: Logger = createLogger(`ecoach-auth`)
+const logger: Logger = createLogger(`Auth`)
 
 let managementClient: ManagementClient<AppMetadata, UserMetadata>
 let authenticationClient: AuthenticationClient

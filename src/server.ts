@@ -4,7 +4,7 @@ import { createLogger } from './server/logger'
 import config from './knexfile'
 
 const migrate = async () => {
-  const logger = createLogger('ecoach-migrations')
+  const logger = createLogger('Migrations')
   try {
     logger.info('Starting')
     await knex(config).migrate.latest()
@@ -15,5 +15,5 @@ const migrate = async () => {
     // process.exit(1)
   }
 }
-// migrate()
+migrate()
 server(__dirname)

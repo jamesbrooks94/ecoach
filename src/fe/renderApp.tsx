@@ -12,7 +12,10 @@ import { Routes } from './pages/Routes'
 import { SnackbarProvider } from 'notistack'
 import Navigation from './components/Navigation'
 import { Container } from '@material-ui/core'
-import './index.css'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import { GlobalTheme } from 'fe/theme'
+
+// import './index.css'
 const renderApp = async (config: any) => {
   initialiseConfigContext(config)
   await initialiseAuthContext()
@@ -22,21 +25,24 @@ const renderApp = async (config: any) => {
 
   ReactDOM.render(
     <ApolloProvider client={client}>
+      <CssBaseline />
       <Router history={history}>
-        <SnackbarProvider
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center',
-          }}
-          maxSnack={3}
-        >
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <Navigation />
-            <Container>
-              <Routes />
-            </Container>
-          </MuiPickersUtilsProvider>
-        </SnackbarProvider>
+        <GlobalTheme>
+          <SnackbarProvider
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center',
+            }}
+            maxSnack={3}
+          >
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <Navigation />
+              <Container>
+                <Routes />
+              </Container>
+            </MuiPickersUtilsProvider>
+          </SnackbarProvider>
+        </GlobalTheme>
       </Router>
     </ApolloProvider>,
     document.getElementById('root')

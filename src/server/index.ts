@@ -105,12 +105,6 @@ const server = (appPath: string) => {
   app.use(
     postgraphile(env.DB_CONNECTION, 'public', {
       additionalGraphQLContextFromRequest: async (req): Promise<any> => {
-        const user: IUser = {
-          id: 'Not set properly',
-          name: 'James',
-          email: 'james@dev.io',
-          roles: [],
-        }
         try {
           const user2 = await getUser(req)
           return { user: user2 }
@@ -118,7 +112,7 @@ const server = (appPath: string) => {
           console.log(err)
         }
         return {
-          user,
+          user: null,
         }
       },
       watchPg: true,
