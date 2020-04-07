@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "build": "react-scripts build && tsc -p tsconfig.app.json",
-    "db:new": "knex --knexfile src/knexfile.ts -x ts migrate:make",
+    "db:new": "knex --knexfile src/knexfile.js -x ts migrate:make",
     "dev": "nf start -j Procfile.dev",
     "start:app": "react-scripts start",
     "start:server": "nodemon",
@@ -16,7 +16,7 @@
     "heroku:push": "heroku container:push web -a e-coach-staging"
   },
   "dependencies": {
-    "@date-io/date-fns": "^2.5.0",
+    "@date-io/date-fns": "1.3.13",
     "@material-ui/core": "^4.9.9",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.48",
@@ -27,7 +27,7 @@
     "apollo-link-http": "^1.5.16",
     "auth0": "^2.24.0",
     "auth0-js": "^9.13.1",
-    "date-fns": "^2.11.1",
+    "date-fns": "2.11.1",
     "dotenv": "^8.2.0",
     "envalid": "^6.0.1",
     "express": "^4.17.1",

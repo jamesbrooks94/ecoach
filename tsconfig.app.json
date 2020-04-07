@@ -6,5 +6,6 @@
     "module": "commonjs",
     "target": "es2017"
   },
-  "include": ["src/index.ts", "src/**/*.ts"]
+  "include": ["src/index.ts", "src/**/*.ts"],
+  "exclude": ["src/knex-file.js", "src/index/**/*", "src/migrations/*/*"]
 }

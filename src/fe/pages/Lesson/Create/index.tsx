@@ -1,46 +1,49 @@
 import React from 'react'
 import SimpleForm from 'fe/forms/Simple'
-import { TextField, Autocomplete, AutocompleteData } from 'mui-rff'
-import { Checkbox as MuiCheckbox, Grid } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
+import { useMutation } from 'fe/utils/apollo'
+import { CREATE_LESSON } from 'fe/queries/lesson'
+import 'date-fns'
+import urls from 'fe/urls'
+import { useAuthContext } from 'fe/context/auth'
+import LessonFields from '../helpers/LessonFields'
 
-const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-
-const autocompleteData: AutocompleteData[] = days.map(day => ({ label: day, value: day }))
+interface ICreateLessonData {
+  name: string
+  day: string
+  startTime: Date
+  endTime: Date
+}
 
 const CreateLesson = () => {
+  const { tenant } = useAuthContext()
+  const [createLesson] = useMutation(CREATE_LESSON) as any
+
+  const createHandler = (variables: ICreateLessonData) => {
+    createLesson({
+      variables: {
+        input: {
+          ...variables,
+          application: tenant,
+        },
+      },
+    })
+  }
   return (
     <>
-      Create lesson
-      <SimpleForm onSubmit={(values: any) => console.log(values)} initialValues={{ planet: [] }}>
-        {() => {
+      <SimpleForm
+        onSubmit={createHandler}
+        redirectOnSubmit={urls.lessons.list}
+        initialValues={{ startTime: new Date().setMinutes(0), endTime: new Date().setMinutes(0) }}
+      >
+        {({ submitting }: { submitting: boolean }) => {
           return (
-            <Grid container>
-              <Grid item xs={12}>
-                <TextField name="name" label="Lesson name" />
+            <>
+              <Typography variant="h5">Create lesson</Typography>
+              <Grid container spacing={2}>
+                <LessonFields disabled={submitting} />
               </Grid>
-              <Grid item xs={12}>
-                <Autocomplete
-                  label="Pick at least one planet"
-                  name="planet"
-                  options={autocompleteData}
-                  getOptionValue={option => option.value}
-                  getOptionLabel={option => option.label}
-                  disableCloseOnSelect={true}
-                  renderOption={(option, { selected }) => (
-                    <>
-                      <MuiCheckbox
-                        style={{ marginRight: 8 }}
-                        checked={selected}
-                        size="small"
-                        disableRipple
-                      />
-                      {option.label}
-                    </>
-                  )}
-                  multiple
-                />
-              </Grid>
-            </Grid>
+            </>
           )
         }}
       </SimpleForm>

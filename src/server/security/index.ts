@@ -50,7 +50,6 @@ export const getJwksKey = async (kid: string): Promise<string> =>
 
 export const getProfile = async (token: string): Promise<IUser> => {
   let profile = await authenticationClient.getProfile(token)
-  console.log(profile)
   logger.debug('Received user profile from Auth0')
   profile = formatUserInfo({ ...profile })
 

@@ -12,15 +12,6 @@ jobs:
       - heroku/install
       - heroku/deploy-via-git:
           force: true
-
-  deploy_production:
-    executor: heroku/default
-    steps:
-      - checkout
-      - heroku/install
-      - heroku/deploy-via-git:
-          force: true
-          app-name: e-coach-production
   build:
     description: 'Run build'
     executor: node/default
@@ -39,6 +30,8 @@ jobs:
       - run:
           name: Build
           command: 'yarn build'
+      - save_cache:
+          key: v1-repo-{{ .Branch }}-{{ .Revision }}
   test:
     description: 'Test app'
     executor: node/default
@@ -50,6 +43,18 @@ jobs:
       - run:
           name: Test
           command: 'yarn test'
+  bdd:
+    description: 'Run BDD'
+    executor: node/default
+    steps:
+      - checkout
+      - restore_cache:
+        keys:
+          - v1-repo-{{ .Branch }}-{{ .Revision }}
+      - run:
+          name: BDD
+          command: 'yarn bdd'
+
 workflows:
   build_and_test:
     jobs:
@@ -60,13 +65,6 @@ workflows:
       - deploy:
           requires:
             - test
-          filters:
-            branches:
-              only: master
-      - deploy_production:
-          type: approval
-          requires:
-            - deploy
           filters:
             branches:
               only: master

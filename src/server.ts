@@ -6,6 +6,7 @@ import config from './knexfile'
 const migrate = async () => {
   const logger = createLogger('Migrations')
   try {
+    // await knex(config).migrate.rollback(undefined, true)
     logger.info('Starting')
     await knex(config).migrate.latest()
     logger.info('Migrated')
@@ -15,5 +16,5 @@ const migrate = async () => {
     // process.exit(1)
   }
 }
-migrate()
-server(__dirname)
+migrate().then(() => server(__dirname))
+// server(__dirname)

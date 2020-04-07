@@ -4,7 +4,7 @@ export const up = (knex: Knex): Promise<any> =>
   knex.schema
     .alterTable('knex_migrations', (table: Knex.TableBuilder) => table.comment('@omit'))
     .alterTable('knex_migrations_lock', (table: Knex.TableBuilder) => table.comment('@omit'))
-    .createTable('application', (table) => {
+    .createTable('application', table => {
       table.increments('id').notNullable().unique().primary()
       table.boolean('enabled').notNullable().defaultTo(true)
       table.text('name').notNullable().unique()
@@ -22,7 +22,7 @@ export const up = (knex: Knex): Promise<any> =>
     })
     .createTable('user', (table: Knex.TableBuilder) => {
       table.text('username').notNullable().unique().primary()
-      table.integer('application').notNullable().references('application_id')
+      table.integer('application').notNullable().references('application.id')
       table.text('first_name').notNullable()
       table.text('surname').notNullable()
       table.text('full_name').notNullable()
@@ -30,14 +30,23 @@ export const up = (knex: Knex): Promise<any> =>
     })
     .createTable('lesson', (table: Knex.TableBuilder) => {
       table.increments('id').notNullable().unique().primary()
-      table.integer('application').notNullable().references('application_id')
+      table.integer('application').notNullable().references('application.id')
       table.text('name').notNullable()
-      table.jsonb('days').notNullable().defaultTo('{}')
-      table.text('created_by').notNullable()
-      table.text('updated_by').notNullable()
+
+      table
+        .enum(
+          'day',
+          ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+          {
+            enumName: 'lesson_day',
+            useNative: true,
+          }
+        )
+        .notNullable()
+      table.dateTime('start_time').notNullable()
+
+      table.dateTime('end_time').notNullable()
       table.timestamps(true, true)
-      table.foreign('created_by').references('user.username')
-      table.foreign('updated_by').references('user.username')
     })
     .createTable('member', (table: Knex.TableBuilder) => {
       table.increments('id').notNullable().unique().primary()
@@ -52,16 +61,33 @@ export const up = (knex: Knex): Promise<any> =>
       table.integer('lesson_id').notNullable().references('lesson.id')
       table.integer('member_id').notNullable().references('member.id')
       table
-        .enum('status', ['requested', 'accepted'], { useNative: true, enumName: 'member_lesson_status' })
+        .enum('status', ['requested', 'accepted'], {
+          useNative: true,
+          enumName: 'member_lesson_status',
+        })
         .notNullable()
         .defaultTo('requested')
     })
+    .createTable('email', table => {
+      table.increments('id').notNullable().unique().primary()
+      table.text('title').notNullable()
+      table.text('content_plain').notNullable()
+      table.text('content_html').notNullable()
+      table.boolean('sent').notNullable().defaultTo(false)
+      table.timestamps(true, true)
+      table.integer('member_id').notNullable().references('member.id')
+    })
+    .raw(`INSERT INTO application(id,name) VALUES (1,'Billericay LTC')`)
 
 export const down = (knex: Knex): Promise<any> =>
   knex.schema
     .dropTable('member_lesson')
     .raw('DROP TYPE IF EXISTS member_lesson_status')
+    .dropTable('email')
+
     .dropTable('lesson')
+    .raw('DROP TYPE IF EXISTS lesson_day')
+
     .dropTable('member')
     .dropTable('user')
     .dropTable('application')

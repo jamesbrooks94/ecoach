@@ -3,7 +3,7 @@ import { ApolloProvider } from 'react-apollo'
 import ReactDOM from 'react-dom'
 import { initialiseConfigContext } from './context/config'
 import getClient from './utils/apollo/client'
-import { initialiseAuthContext, AuthContext } from './context/auth'
+import { initialiseAuthContext } from './context/auth'
 import DateFnsUtils from '@date-io/date-fns'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import { Router } from 'react-router-dom'
@@ -19,7 +19,6 @@ import { GlobalTheme } from 'fe/theme'
 const renderApp = async (config: any) => {
   initialiseConfigContext(config)
   await initialiseAuthContext()
-  console.log(AuthContext)
 
   const client = await getClient()
 
@@ -37,7 +36,7 @@ const renderApp = async (config: any) => {
           >
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <Navigation />
-              <Container>
+              <Container style={{ marginTop: 16, marginBottom: 16 }}>
                 <Routes />
               </Container>
             </MuiPickersUtilsProvider>
