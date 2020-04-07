@@ -72,3 +72,11 @@ export const CREATE_MEMBER_LESSON = gql`
     }
   }
 `
+
+export const DELETE_MEMBER_LESSON = gql`
+  mutation($id: Int!) {
+    deleteMemberLessonById(input: { id: $id }) {
+      clientMutationId
+    }
+  }
+`
