@@ -32,6 +32,7 @@ export const up = (knex: Knex): Promise<any> =>
       table.increments('id').notNullable().unique().primary()
       table.integer('application').notNullable().references('application.id')
       table.text('name').notNullable()
+      table.text('cost').notNullable().defaultTo('0')
 
       table
         .enum(
@@ -53,7 +54,8 @@ export const up = (knex: Knex): Promise<any> =>
       table.text('first_name').notNullable()
       table.text('surname').notNullable()
       table.text('full_name').notNullable()
-      table.text('user').notNullable()
+      table.text('user')
+      table.integer('application').notNullable().references('application.id')
       table.foreign('user').references('user.username')
     })
     .createTable('member_lesson', (table: Knex.TableBuilder) => {

@@ -75,7 +75,7 @@ const ViewLesson: React.FC<IViewLessonProps> = ({
         }}
       </SimpleForm>
       <Paper style={{ marginTop: 16 }}>
-        <PlayerLessonTable lesson={lesson} />
+        <PlayerLessonTable lesson={lesson} refetch={refetch} />
       </Paper>
     </>
   )

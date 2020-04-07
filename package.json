@@ -42,6 +42,7 @@
     "history": "^4.10.1",
     "jwks-rsa": "^1.7.0",
     "knex": "^0.20.13",
+    "lodash": "^4.17.15",
     "material-table": "^1.57.2",
     "morgan": "^1.10.0",
     "mui-rff": "^2.1.8",
@@ -58,7 +59,8 @@
     "ts-node": "^8.8.2",
     "typeface-roboto": "^0.0.75",
     "typescript": "~3.7.2",
-    "winston": "^3.2.1"
+    "winston": "^3.2.1",
+    "yup": "^0.28.3"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -71,11 +73,13 @@
     "@types/helmet": "^0.0.45",
     "@types/history": "^4.7.5",
     "@types/jest": "^24.0.0",
+    "@types/lodash": "^4.14.149",
     "@types/morgan": "^1.9.0",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "@types/react-router-dom": "^5.1.3",
+    "@types/yup": "^0.26.34",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "nodemon": "^2.0.2"
