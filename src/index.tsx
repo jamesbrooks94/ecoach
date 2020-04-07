@@ -2,6 +2,7 @@ import * as serviceWorker from './serviceWorker'
 import { getAppConfig } from './fe/appConfig'
 import { init, handleAuthCallback, checkSession } from './fe/utils/auth0'
 import renderApp from './fe/renderApp'
+import 'typeface-roboto'
 
 const bootstrap = async () => {
   const config = await getAppConfig()

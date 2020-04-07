@@ -3,7 +3,7 @@ import { makeProcessSchemaPlugin } from 'postgraphile'
 import { applyMiddleware } from 'graphql-middleware'
 import { createLogger } from '../logger'
 
-const logger = createLogger('ecoach-permissions')
+const logger = createLogger('Permissions')
 
 const fallbackRule = rule()((_a, _b, { user }, { fieldName }) => {
   logger.info(`${user} requested ${fieldName}`)
@@ -25,4 +25,4 @@ const permissions = shield(
   }
 )
 
-export const plugin = makeProcessSchemaPlugin((schema) => applyMiddleware(schema, permissions))
+export const plugin = makeProcessSchemaPlugin(schema => applyMiddleware(schema, permissions))

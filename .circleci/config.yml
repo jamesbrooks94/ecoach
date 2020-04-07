@@ -10,7 +10,8 @@ jobs:
     steps:
       - checkout
       - heroku/install
-      - heroku/deploy-via-git
+      - heroku/deploy-via-git:
+          force: true
   build:
     description: 'Run build'
     executor: node/default
@@ -97,6 +98,6 @@ workflows:
           requires:
             - test
             - build
-          filters:
-            branches:
-              only: master
+          # filters:
+          #   branches:
+          #     only: master
