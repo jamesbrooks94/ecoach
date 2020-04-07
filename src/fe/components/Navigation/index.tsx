@@ -10,11 +10,8 @@ import { useQuery } from 'fe/utils/apollo'
 const Navigation = () => {
   const { tenant } = useAuthContext()
   const {
-    data: {
-      application: { name },
-    },
+    data: { application: { name } = { name: '' } },
   } = useQuery(GET_CURRENT_TENANT, { variables: { tenant } }) as any
-  console.log(name)
   return (
     <AppBar position="static">
       <Container>

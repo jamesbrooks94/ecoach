@@ -26,9 +26,8 @@ interface ILessons {
 const LessonList = () => {
   const { tenant } = useAuthContext()
   const {
-    data: { allLessons = [], ...d },
+    data: { allLessons = [] },
   }: ILessons = useQuery(ALL_LESSONS, { variables: { tenant } })
-  console.log(d)
   const actions = [
     { isFreeAction: true, icon: 'add', onClick: () => history.push(urls.lessons.create) },
   ]
