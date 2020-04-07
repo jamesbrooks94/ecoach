@@ -2,11 +2,15 @@ import knex from 'knex'
 import server from './server/index'
 import { createLogger } from './server/logger'
 import config from './knexfile'
+import { env } from './config'
 
 const migrate = async () => {
   const logger = createLogger('Migrations')
   try {
-    // await knex(config).migrate.rollback(undefined, true)
+    if (env.FORCE_RESET) {
+      logger.info('Resetting all data as FORCE_RESET is true')
+      await knex(config).schema.raw('DROP SCHEMA public CASCADE').createSchema('public')
+    }
     logger.info('Starting')
     await knex(config).migrate.latest()
     logger.info('Migrated')
