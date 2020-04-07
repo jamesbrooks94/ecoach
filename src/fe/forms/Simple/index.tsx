@@ -86,7 +86,7 @@ const Form: React.FC<ISimpleFormProps> = ({
                   {resetLabel && (
                     <Button
                       type="button"
-                      color="primary"
+                      color="secondary"
                       variant="contained"
                       className={classes.button}
                       onClick={formProps.form.reset}
@@ -99,18 +99,18 @@ const Form: React.FC<ISimpleFormProps> = ({
                   {showCancel && (
                     <Button
                       type="reset"
-                      color="primary"
+                      color="secondary"
                       onClick={cancel}
                       variant="contained"
                       className={classes.button}
                     >
-                      Cancel />
+                      Cancel
                     </Button>
                   )}
                   {showSubmit && (
                     <Button
                       type="submit"
-                      color="secondary"
+                      color="primary"
                       variant="contained"
                       className={classes.button}
                       disabled={formProps.submitting || formProps.pristine || disabled}
