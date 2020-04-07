@@ -36,7 +36,7 @@ const LessonFields: React.FC<ILessonFieldProps> = ({ disabled }) => (
         name="startTime"
         dateFunsUtils={DateFnsUtils}
         disabled={disabled}
-        // minutesStep={5}
+        minutesStep={5}
       />
     </Grid>
     <Grid item xs={12} sm={6} md={4}>
@@ -45,7 +45,7 @@ const LessonFields: React.FC<ILessonFieldProps> = ({ disabled }) => (
         name="endTime"
         dateFunsUtils={DateFnsUtils}
         disabled={disabled}
-        // minutesStep={5}
+        minutesStep={5}
       />
     </Grid>
   </>

@@ -18,23 +18,35 @@ interface ICreateLessonData {
 const CreateLesson = () => {
   const { tenant } = useAuthContext()
   const [createLesson] = useMutation(CREATE_LESSON) as any
+  const getDate = (hoursToAdd = 0) => {
+    const coeff = 1000 * 60 * 5
+    const date = new Date() //or use any other date
+    date.setHours(date.getHours() + hoursToAdd)
+    return new Date(Math.round(date.getTime() / coeff) * coeff)
+  }
 
   const createHandler = (variables: ICreateLessonData) => {
     createLesson({
       variables: {
         input: {
           ...variables,
+          startTime: new Date(variables.startTime),
+          endTime: new Date(variables.endTime),
           application: tenant,
         },
       },
     })
+  }
+  const initialValues = {
+    startTime: getDate(),
+    endTime: getDate(1),
   }
   return (
     <>
       <SimpleForm
         onSubmit={createHandler}
         redirectOnSubmit={urls.lessons.list}
-        initialValues={{ startTime: new Date().setMinutes(0), endTime: new Date().setMinutes(0) }}
+        initialValues={initialValues}
       >
         {({ submitting }: { submitting: boolean }) => {
           return (

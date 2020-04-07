@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallowWithIntl as shallow } from 'utils/testHelper'
+import { shallow } from 'enzyme'
 import { act } from 'react-dom/test-utils'
 
 import Toggle from '../'
