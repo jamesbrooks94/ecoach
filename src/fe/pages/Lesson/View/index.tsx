@@ -6,7 +6,6 @@ import { useQuery, useMutation } from 'fe/utils/apollo'
 import { GET_LESSON, UPDATE_LESSON } from 'fe/queries/lesson'
 import { ILesson } from '../List'
 import { Typography, Paper, Grid } from '@material-ui/core'
-import MaterialTable from 'material-table'
 
 import EditIcon from '@material-ui/icons/Edit'
 import history from 'fe/utils/history'
