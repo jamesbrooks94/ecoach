@@ -19,10 +19,10 @@ const CreateLesson = () => {
   const { tenant } = useAuthContext()
   const [createLesson] = useMutation(CREATE_LESSON) as any
   const getDate = (hoursToAdd = 0) => {
-    const coeff = 1000 * 60 * 5
-    const date = new Date() //or use any other date
+    const fiveMins = 1000 * 60 * 5
+    const date = new Date()
     date.setHours(date.getHours() + hoursToAdd)
-    return new Date(Math.round(date.getTime() / coeff) * coeff)
+    return new Date(Math.round(date.getTime() / fiveMins) * fiveMins)
   }
 
   const createHandler = (variables: ICreateLessonData) => {

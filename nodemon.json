@@ -12,7 +12,8 @@
     "test/**/*",
     "docs/*",
     "src/public",
-    "src/migrations"
+    "src/migrations",
+    "src/fe"
   ],
   "ext": "ts,gql,js",
   "inspect": true

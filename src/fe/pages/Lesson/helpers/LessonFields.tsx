@@ -15,34 +15,39 @@ interface ILessonFieldProps {
 }
 const LessonFields: React.FC<ILessonFieldProps> = ({ disabled }) => (
   <>
-    <Grid item xs={12}>
-      <TextField name="name" label="Lesson name" disabled={disabled} />
+    <Grid item xs={12} sm={6}>
+      <TextField name="name" label="Lesson name" disabled={disabled} required={true} />
     </Grid>
-    <Grid item xs={12} md={4}>
+    <Grid item xs={12} sm={6}>
+      <TextField name="cost" label="Lesson cost" disabled={disabled} required={true} />
+    </Grid>
+    <Grid item xs={12} sm={4}>
       <Autocomplete
         label="Day"
         name="day"
         options={autocompleteData}
         getOptionValue={option => option.value}
         getOptionLabel={option => option.label}
-        disableCloseOnSelect={false}
+        required={true}
         renderOption={({ label }) => <>{label}</>}
         disabled={disabled}
       />
     </Grid>
-    <Grid item xs={12} sm={6} md={4}>
+    <Grid item xs={12} sm={4}>
       <TimePicker
         label="Start time"
         name="startTime"
+        required={true}
         dateFunsUtils={DateFnsUtils}
         disabled={disabled}
         minutesStep={5}
       />
     </Grid>
-    <Grid item xs={12} sm={6} md={4}>
+    <Grid item xs={12} sm={4}>
       <TimePicker
         label="End time"
         name="endTime"
+        required={true}
         dateFunsUtils={DateFnsUtils}
         disabled={disabled}
         minutesStep={5}

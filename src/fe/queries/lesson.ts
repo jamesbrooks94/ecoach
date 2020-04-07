@@ -5,11 +5,12 @@ export const ALL_LESSONS = gql`
     allLessons(condition: { application: $tenant }) {
       edges {
         node {
-          day
           id
+          cost
+          day
+          endTime
           name
           startTime
-          endTime
 
           members: memberLessonsByLessonId {
             totalCount
@@ -31,15 +32,17 @@ export const GET_LESSON = gql`
   query($id: Int!) {
     lesson: lessonById(id: $id) {
       id
-      name
-      endTime
+      cost
       day
+      endTime
+      name
       startTime
       lessonMembers: memberLessonsByLessonId {
         edges {
           node {
             id
             member: memberByMemberId {
+              id
               firstName
               fullName
               surname
@@ -54,6 +57,16 @@ export const UPDATE_LESSON = gql`
   mutation($id: Int!, $input: LessonPatch!) {
     updateLessonById(input: { id: $id, lessonPatch: $input }) {
       lesson {
+        id
+      }
+    }
+  }
+`
+
+export const CREATE_MEMBER_LESSON = gql`
+  mutation($lessonId: Int!, $memberId: Int!) {
+    createMemberLesson(input: { memberLesson: { lessonId: $lessonId, memberId: $memberId } }) {
+      memberLesson {
         id
       }
     }

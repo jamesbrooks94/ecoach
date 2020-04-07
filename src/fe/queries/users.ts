@@ -11,3 +11,20 @@ export const ME = gql`
     }
   }
 `
+
+export const GET_USERS = gql`
+  query($tenant: Int!) {
+    applicationById(id: $tenant) {
+      id
+      members: membersByApplication {
+        edges {
+          node {
+            id
+            firstName
+            surname
+          }
+        }
+      }
+    }
+  }
+`
