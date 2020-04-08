@@ -33,13 +33,11 @@ const PlayerLessonTable: React.FC<IPlayerLessonProps> = ({ lesson, refetch }) =>
   const ids = uniq(lesson.lessonMembers.map(i => i.member.id))
 
   const onSubmit = async (variables: { players: number[] }) => {
-    console.log('variables', variables)
     const playersToCreate = variables.players.filter(p => !ids.includes(p))
     const playersToRemove = lesson.lessonMembers.reduce(
       (acc, curr) => (variables.players.includes(curr.member.id) ? acc : [...acc, curr.id]),
       [] as number[]
     )
-    console.log(playersToRemove)
     await Promise.all([
       ...playersToCreate.map((player: number) =>
         createMemberLesson({
@@ -52,8 +50,6 @@ const PlayerLessonTable: React.FC<IPlayerLessonProps> = ({ lesson, refetch }) =>
       ...playersToRemove.map(player => deleteMemberLesson({ variables: { id: player } })),
     ])
     refetch()
-
-    console.log(variables)
   }
   const actions = autocompleteData.length
     ? [
@@ -89,7 +85,10 @@ const PlayerLessonTable: React.FC<IPlayerLessonProps> = ({ lesson, refetch }) =>
         },
       ]
     : undefined
-  const columns = [{ title: 'Name', field: 'member.fullName' }]
+  const columns = [
+    { title: 'Name', field: 'member.fullName' },
+    { title: 'Email', field: 'member.email' },
+  ]
   return (
     <>
       <MaterialTable

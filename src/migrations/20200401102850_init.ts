@@ -54,6 +54,7 @@ export const up = (knex: Knex): Promise<any> =>
       table.text('first_name').notNullable()
       table.text('surname').notNullable()
       table.text('full_name').notNullable()
+      table.text('email').notNullable()
       table.text('user')
       table.integer('application').notNullable().references('application.id')
       table.foreign('user').references('user.username')

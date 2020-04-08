@@ -22,6 +22,9 @@ const Navigation = () => {
           <Button component={Link} to={urls.lessons.list} color="inherit">
             Lessons
           </Button>
+          <Button component={Link} to={urls.members.list} color="inherit">
+            Members
+          </Button>
           <Button color="inherit" onClick={() => logout()}>
             Logout
           </Button>
