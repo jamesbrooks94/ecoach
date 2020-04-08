@@ -34,7 +34,9 @@ const ViewMember: React.FC<IViewMember> = ({
 
   if (!member) return null
 
-  const totalCost = member.memberLessons.reduce((acc, curr) => acc + Number(curr.lesson.cost), 0)
+  const totalCost = member.memberLessons
+    .reduce((acc, curr) => acc + Number(curr.lesson.cost), 0)
+    .toFixed(2)
   const onSubmit = ({ firstName, surname, email }: any) => {
     update({
       variables: {
