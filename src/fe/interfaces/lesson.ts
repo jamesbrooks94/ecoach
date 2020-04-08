@@ -4,8 +4,8 @@ export interface ILesson {
   id: number
   name: string
   day: string
-  startTime: any
-  endTime: any
+  startTime: string
+  endTime: string
   cost: string
   lessonMembers: ILessonMember[]
 }

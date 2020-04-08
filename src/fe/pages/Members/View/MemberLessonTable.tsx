@@ -6,6 +6,7 @@ import { ILesson } from 'fe/interfaces/lesson'
 import { Link } from 'react-router-dom'
 import urls from 'fe/urls'
 import AddLessonToPlayer from 'fe/forms/AddLessonToPlayer'
+import { formatTime } from 'fe/utils/time'
 
 interface IMemberLessonTableProps {
   member: IMember
@@ -38,24 +39,12 @@ const MemberLessonTable: React.FC<IMemberLessonTableProps> = ({ member, refetch 
     {
       title: 'Start time',
       field: 'startTime',
-      render: ({ startTime }: ILesson) => {
-        const d = new Date(startTime)
-        return `${d.getHours().toString().padStart(2, '0')}:${d
-          .getMinutes()
-          .toString()
-          .padStart(2, '0')}`
-      },
+      render: ({ startTime }: ILesson) => formatTime(startTime),
     },
     {
       title: 'End time',
       field: 'endTime',
-      render: ({ endTime }: ILesson) => {
-        const d = new Date(endTime)
-        return `${d.getHours().toString().padStart(2, '0')}:${d
-          .getMinutes()
-          .toString()
-          .padStart(2, '0')}`
-      },
+      render: ({ endTime }: ILesson) => formatTime(endTime),
     },
   ]
   return <MaterialTable actions={actions} title="Lessons" data={lessons} columns={columns} />

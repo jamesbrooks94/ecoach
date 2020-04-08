@@ -12,6 +12,7 @@ const routeConfig: any = {
   [urls.lessons.edit()]: (props: any) => <ViewLesson {...props} isEdit />,
   [urls.members.list]: MemberList,
   [urls.members.view()]: ViewMember,
+  [urls.members.edit()]: (props: any) => <ViewMember {...props} isEdit />,
 }
 
 export default routeConfig

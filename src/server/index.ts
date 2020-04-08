@@ -10,6 +10,7 @@ import { IUser } from './interfaces'
 import { IncomingMessage } from 'http'
 const PostGraphileConnectionFilterPlugin = require('postgraphile-plugin-connection-filter')
 import { getProfile } from './security'
+import { createLogger } from './logger'
 // import { getTokenInfo, verifyToken } from './security/utils'
 // import { getJwksKey } from './security'
 
@@ -19,11 +20,14 @@ const NO_BEARER_TOKEN: string = `${AUTHENTICATION_FAILED}, no Bearer token provi
 const ERROR_GETTING_PROFILE: string = `${AUTHENTICATION_FAILED}, Error getting profile`
 const PROFILE_NOT_FOUND: string = `${AUTHENTICATION_FAILED}, profile not found`
 
+const logger = createLogger('Auth')
+
 const getUser = async (req: IncomingMessage) => {
   const { authorization } = req.headers
   let profile: IUser
 
   if (!authorization || !authorization.startsWith('Bearer')) {
+    logger.error(NO_BEARER_TOKEN)
     throw new Error(NO_BEARER_TOKEN)
   }
   const token = authorization.substr(7)
@@ -42,7 +46,7 @@ const getUser = async (req: IncomingMessage) => {
       throw new Error(ERROR_GETTING_PROFILE)
     }
   } catch (err) {
-    console.log(err)
+    logger.error(err)
     throw new Error(PROFILE_NOT_FOUND)
   }
   return profile
@@ -66,7 +70,7 @@ const extend = makeExtendSchemaPlugin(build => {
       Query: {
         me: {
           resolve(_parent, _args, { user }) {
-            console.log(user)
+            logger.debug(user)
             if (user) return user
           },
         },
@@ -106,7 +110,7 @@ const server = (appPath: string) => {
           const user2 = await getUser(req)
           return { user: user2 }
         } catch (err) {
-          console.log(err)
+          logger.error(err)
         }
         return {
           user: null,
@@ -139,7 +143,7 @@ const server = (appPath: string) => {
   app.set('port', process.env.PORT || 5000)
 
   app.listen(app.get('port'), function () {
-    console.log('Server started: http://%s:%s', app.get('host'), app.get('port')) // eslint-disable-line no-console
+    logger.info(`Server started: http://${app.get('host')}:${app.get('port')}/graphiql`)
   })
 }
 

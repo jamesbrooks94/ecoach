@@ -7,6 +7,7 @@ import { useAuthContext } from 'fe/context/auth'
 import { Link } from 'react-router-dom'
 import CreateLessonDialog from 'fe/forms/CreateLessonDialog'
 import { ILesson, ILessonsApiResponse } from 'fe/interfaces/lesson'
+import { formatTime } from 'fe/utils/time'
 
 const LessonList = () => {
   const { tenant } = useAuthContext()
@@ -43,24 +44,12 @@ const LessonList = () => {
         {
           title: 'Start time',
           field: 'startTime',
-          render: ({ startTime }) => {
-            const d = new Date(startTime)
-            return `${d
-              .getHours()
-              .toString()
-              .padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')}`
-          },
+          render: ({ startTime }) => formatTime(startTime),
         },
         {
           title: 'End time',
           field: 'endTime',
-          render: ({ endTime }) => {
-            const d = new Date(endTime)
-            return `${d
-              .getHours()
-              .toString()
-              .padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')}`
-          },
+          render: ({ endTime }) => formatTime(endTime),
         },
         {
           title: 'Players',

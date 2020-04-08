@@ -5,8 +5,12 @@ export interface IMember {
   firstName: string
   surname: string
   fullName: string
-  lessons: any[]
-  memberLessons: { lesson: ILesson }[]
+  memberLessons: IMemberLesson[]
+}
+
+interface IMemberLesson {
+  id: number
+  lesson: ILesson
 }
 
 export interface IMemberListData {
