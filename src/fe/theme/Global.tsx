@@ -1,6 +1,11 @@
 import React from 'react'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 const theme = createMuiTheme({
+  typography: {
+    h4: {
+      marginBottom: 32,
+    },
+  },
   overrides: {
     MuiCheckbox: {
       root: {

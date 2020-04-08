@@ -6,28 +6,14 @@ import MaterialTable from 'material-table'
 import { Link } from 'react-router-dom'
 import urls from 'fe/urls'
 import CreateMemberDialog from 'fe/forms/CreateMemberDialog'
-
-interface IMember {
-  id: string
-  firstName: string
-  surname: string
-  fullName: string
-  lessons: any[]
-}
-
-interface IMemberData {
-  data: {
-    allMembers?: IMember[]
-  }
-  refetch: Function
-}
+import { IMemberListData } from 'fe/interfaces/member'
 
 const MemberList = () => {
   const { tenant } = useAuthContext()
   const {
     data: { allMembers = [] },
     refetch,
-  }: IMemberData = useQuery(ALL_MEMBERS, { variables: { tenant } })
+  }: IMemberListData = useQuery(ALL_MEMBERS, { variables: { tenant } })
 
   const actions = [
     {
@@ -40,6 +26,7 @@ const MemberList = () => {
   return (
     <MaterialTable
       actions={actions}
+      title="All members"
       columns={[
         {
           title: 'Name',

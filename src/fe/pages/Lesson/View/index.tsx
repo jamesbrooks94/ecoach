@@ -3,12 +3,12 @@ import SimpleForm from 'fe/forms/Simple'
 import { RouteComponentProps, Link } from 'react-router-dom'
 import { useQuery, useMutation } from 'fe/utils/apollo'
 import { GET_LESSON, UPDATE_LESSON } from 'fe/queries/lesson'
-import { ILesson } from '../List'
 import { Typography, Paper, Grid, IconButton } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit'
 import urls from 'fe/urls'
 import PlayerLessonTable from './PlayerLessonTable'
 import LessonFields from 'fe/forms/CreateLessonDialog/helpers/LessonFields'
+import { ILesson } from 'fe/interfaces/lesson'
 
 interface ILessonResponse {
   data: {
@@ -34,9 +34,9 @@ const ViewLesson: React.FC<IViewLessonProps> = ({
 
   if (!lesson) return null
 
-  const onSubmit = ({ name, startTime, endTime, day }: any) => {
+  const onSubmit = ({ name, startTime, endTime, day, cost }: any) => {
     if (isEdit) {
-      const input = { name, startTime, endTime, day }
+      const input = { name, startTime, endTime, day, cost }
       updateLesson({
         variables: {
           id: ~~id,
@@ -50,9 +50,7 @@ const ViewLesson: React.FC<IViewLessonProps> = ({
     <>
       <Grid container justify="space-between">
         <Grid item>
-          <Typography variant="h4" style={{ marginBottom: 32 }}>
-            Lesson - {lesson.name}
-          </Typography>
+          <Typography variant="h4">Lesson - {lesson.name}</Typography>
         </Grid>
         {!isEdit && (
           <Grid item>

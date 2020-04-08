@@ -11,7 +11,7 @@ export const init = async (config: any) => {
   auth0Client = new auth0.WebAuth({
     domain: config.AUTH_DOMAIN,
     clientID: config.AUTH_CLIENT_ID,
-    redirectUri: `${window.location.origin}/callback`,
+    redirectUri: `${window.location.origin}/callback/`,
     audience: config.AUDIENCE,
     responseType: 'token id_token',
     scope: 'openid profile email',

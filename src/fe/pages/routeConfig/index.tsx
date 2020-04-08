@@ -3,6 +3,7 @@ import urls from '../../urls'
 import LessonList from '../Lesson/List'
 import ViewLesson from '../Lesson/View'
 import MemberList from '../Members/List'
+import ViewMember from '../Members/View'
 
 const routeConfig: any = {
   [urls.root]: LessonList,
@@ -10,6 +11,7 @@ const routeConfig: any = {
   [urls.lessons.view()]: ViewLesson,
   [urls.lessons.edit()]: (props: any) => <ViewLesson {...props} isEdit />,
   [urls.members.list]: MemberList,
+  [urls.members.view()]: ViewMember,
 }
 
 export default routeConfig

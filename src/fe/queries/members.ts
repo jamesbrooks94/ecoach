@@ -26,3 +26,28 @@ export const ALL_MEMBERS = gql`
     }
   }
 `
+export const GET_MEMBER = gql`
+  query($id: Int!) {
+    member: memberById(id: $id) {
+      id
+      firstName
+      surname
+      fullName
+      email
+      memberLessons: memberLessonsByMemberId {
+        edges {
+          node {
+            lesson: lessonByLessonId {
+              id
+              name
+              cost
+              day
+              startTime
+              endTime
+            }
+          }
+        }
+      }
+    }
+  }
+`
