@@ -6,8 +6,7 @@ export const up = (knex: Knex): Promise<any> =>
     table.text('name').notNullable()
     table.integer('application').notNullable().references('application.id')
     table.text('subject').notNullable()
-    table.text('content_html', 'MEDIUMTEXT')
-    table.text('content_plain', 'MEDIUMTEXT')
+    table.text('content', 'MEDIUMTEXT')
   })
 
 export const down = (knex: Knex): Promise<any> => knex.schema.dropTable('email_templates')

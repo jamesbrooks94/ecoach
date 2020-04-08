@@ -1,5 +1,5 @@
-import React, { Component, useState } from 'react'
-import { EditorState, convertToRaw } from 'draft-js'
+import React, { useState } from 'react'
+import { EditorState, convertToRaw, convertFromHTML } from 'draft-js'
 import { Editor } from 'react-draft-wysiwyg'
 import draftToHtml from 'draftjs-to-html'
 import convert from 'textversionjs'
@@ -7,13 +7,17 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import { Grid } from '@material-ui/core'
 import SimpleForm from 'fe/forms/Simple'
 import { TextField } from 'mui-rff'
+import { useMutation } from 'fe/utils/apollo'
 const CreateEmailTemplate = () => {
   const [state, setState] = useState<EditorState>(EditorState.createEmpty())
+  // const [create] = useMutation()
   const onChange = (editorState: any) => {
+    console.log(editorState)
     setState(editorState)
   }
   const onSubmit = (variables: any) => {
     const contentHtml = draftToHtml(convertToRaw(state.getCurrentContent()))
+
     const contentPlain = convert(contentHtml)
     const data = {
       ...variables,
