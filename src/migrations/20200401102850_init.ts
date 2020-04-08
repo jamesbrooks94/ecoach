@@ -79,7 +79,7 @@ export const up = (knex: Knex): Promise<any> =>
       table.timestamps(true, true)
       table.integer('member_id').notNullable().references('member.id')
     })
-    .raw(`INSERT INTO application(id,name) VALUES (1,'Billericay LTC')`)
+    .raw(`INSERT INTO application(id,name) VALUES (1,'Test app')`)
 
 export const down = (knex: Knex): Promise<any> =>
   knex.schema
