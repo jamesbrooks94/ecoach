@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAuthContext } from 'fe/context/auth'
-import { useQuery, useMutation } from 'fe/utils/apollo'
-import { ALL_MEMBERS, CREATE_MEMBER } from 'fe/queries/members'
+import { useQuery } from 'fe/utils/apollo'
+import { ALL_MEMBERS } from 'fe/queries/members'
 import MaterialTable from 'material-table'
 import { Link } from 'react-router-dom'
 import urls from 'fe/urls'
@@ -28,8 +28,6 @@ const MemberList = () => {
     data: { allMembers = [] },
     refetch,
   }: IMemberData = useQuery(ALL_MEMBERS, { variables: { tenant } })
-
-  const [createUser]: any = useMutation(CREATE_MEMBER, refetch)
 
   const actions = [
     {
