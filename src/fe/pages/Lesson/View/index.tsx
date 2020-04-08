@@ -1,14 +1,12 @@
 import React from 'react'
 import LessonFields from '../helpers/LessonFields'
 import SimpleForm from 'fe/forms/Simple'
-import { RouteComponentProps } from 'react-router-dom'
+import { RouteComponentProps, Link } from 'react-router-dom'
 import { useQuery, useMutation } from 'fe/utils/apollo'
 import { GET_LESSON, UPDATE_LESSON } from 'fe/queries/lesson'
 import { ILesson } from '../List'
-import { Typography, Paper, Grid } from '@material-ui/core'
-
+import { Typography, Paper, Grid, Button, IconButton } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit'
-import history from 'fe/utils/history'
 import urls from 'fe/urls'
 import PlayerLessonTable from './PlayerLessonTable'
 
@@ -58,7 +56,9 @@ const ViewLesson: React.FC<IViewLessonProps> = ({
         </Grid>
         {!isEdit && (
           <Grid item>
-            <EditIcon color="primary" onClick={() => history.push(urls.lessons.edit(id))} />
+            <IconButton to={urls.lessons.edit(id)} component={Link}>
+              <EditIcon color="primary" />
+            </IconButton>
           </Grid>
         )}
       </Grid>

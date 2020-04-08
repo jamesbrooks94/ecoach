@@ -56,9 +56,7 @@ export const GET_LESSON = gql`
 export const UPDATE_LESSON = gql`
   mutation($id: Int!, $input: LessonPatch!) {
     updateLessonById(input: { id: $id, lessonPatch: $input }) {
-      lesson {
-        id
-      }
+      clientMutationId
     }
   }
 `
@@ -66,9 +64,7 @@ export const UPDATE_LESSON = gql`
 export const CREATE_MEMBER_LESSON = gql`
   mutation($lessonId: Int!, $memberId: Int!) {
     createMemberLesson(input: { memberLesson: { lessonId: $lessonId, memberId: $memberId } }) {
-      memberLesson {
-        id
-      }
+      clientMutationId
     }
   }
 `
