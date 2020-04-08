@@ -11,6 +11,9 @@ const urls = {
     list: '/member/list',
     view: (id: string | number = ':id') => `/member/${id}`,
   },
+  emailTemplate: {
+    create: '/email-template/create',
+  },
 }
 
 export default urls

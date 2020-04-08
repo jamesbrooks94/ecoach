@@ -80,7 +80,7 @@ const Form: React.FC<ISimpleFormProps> = ({
 
             {children && children(formProps)}
 
-            <Grid item sm={12}>
+            <Grid item sm={12} style={{ zIndex: 10 }}>
               <Grid container justify="flex-end">
                 <div>
                   {resetLabel && (

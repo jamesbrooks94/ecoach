@@ -13,6 +13,7 @@ export const env = cleanEnv(
     AUTH_CLIENT_ID: str(),
     AUTH_CLIENT_SECRET: str(),
     FORCE_RESET: bool({ default: false }),
+    REGENERATE_LAST: bool({ default: false }),
   },
   {
     reporter: ({ errors }) => {
