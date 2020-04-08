@@ -26,6 +26,14 @@ export const ALL_MEMBERS = gql`
     }
   }
 `
+
+export const UPDATE_MEMBER = gql`
+  mutation($id: Int!, $input: MemberPatch!) {
+    updateMemberById(input: { id: $id, memberPatch: $input }) {
+      clientMutationId
+    }
+  }
+`
 export const GET_MEMBER = gql`
   query($id: Int!) {
     member: memberById(id: $id) {
@@ -37,6 +45,7 @@ export const GET_MEMBER = gql`
       memberLessons: memberLessonsByMemberId {
         edges {
           node {
+            id
             lesson: lessonByLessonId {
               id
               name
