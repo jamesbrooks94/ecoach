@@ -4,8 +4,7 @@ import { useMutation } from 'fe/utils/apollo'
 import { CREATE_MEMBER } from 'fe/queries/members'
 import DialogForm from 'fe/forms/Dialog'
 import AddIcon from '@material-ui/icons/Add'
-import { Grid } from '@material-ui/core'
-import { TextField } from 'mui-rff'
+import MemberFields from './MemberFields'
 
 interface ICreateMemberDialog {
   refetch: Function
@@ -27,19 +26,7 @@ const CreateMemberDialog: React.FC<ICreateMemberDialog> = ({ refetch }) => {
   return (
     <DialogForm trigger={<AddIcon />} onSubmit={onSubmit}>
       {() => {
-        return (
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField label="First name" name="firstName" required />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField label="Surname" name="surname" required />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField label="Email" name="email" required />
-            </Grid>
-          </Grid>
-        )
+        return <MemberFields />
       }}
     </DialogForm>
   )

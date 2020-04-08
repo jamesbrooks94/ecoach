@@ -8,7 +8,7 @@ const urls = {
   },
   members: {
     list: '/member/list',
-    view: (id = ':id') => `/member/view/${id}`,
+    view: (id: string | number = ':id') => `/member/view/${id}`,
   },
 }
 
