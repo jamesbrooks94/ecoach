@@ -2,7 +2,7 @@ import React from 'react'
 
 import MaterialTable from 'material-table'
 import { IMember } from 'fe/interfaces/member'
-import { ILesson, ILessonMember } from 'fe/interfaces/lesson'
+import { ILesson } from 'fe/interfaces/lesson'
 import { Link } from 'react-router-dom'
 import urls from 'fe/urls'
 import AddLessonToPlayer from 'fe/forms/AddLessonToPlayer'
