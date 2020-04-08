@@ -3,10 +3,10 @@ import { useQuery } from 'fe/utils/apollo'
 import { ALL_LESSONS } from 'fe/queries/lesson'
 import { Typography } from '@material-ui/core'
 import MaterialTable from 'material-table'
-import history from 'fe/utils/history'
 import urls from 'fe/urls'
 import { useAuthContext } from 'fe/context/auth'
 import { Link } from 'react-router-dom'
+import CreateLessonDialog from 'fe/forms/CreateLessonDialog'
 
 interface ILessonMember {
   id: number
@@ -30,15 +30,21 @@ interface ILessons {
   data: {
     allLessons?: ILesson[]
   }
+  refetch: Function
 }
 
 const LessonList = () => {
   const { tenant } = useAuthContext()
   const {
     data: { allLessons = [] },
+    refetch,
   }: ILessons = useQuery(ALL_LESSONS, { variables: { tenant } })
   const actions = [
-    { isFreeAction: true, icon: 'add', onClick: () => history.push(urls.lessons.create) },
+    {
+      isFreeAction: true,
+      icon: () => <CreateLessonDialog refetch={refetch} />,
+      onClick: () => null,
+    },
   ]
   return (
     <>

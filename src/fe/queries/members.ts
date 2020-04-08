@@ -17,6 +17,7 @@ export const ALL_MEMBERS = gql`
           firstName
           surname
           fullName
+          email
           lessons: memberLessonsByMemberId {
             totalCount
           }

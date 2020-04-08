@@ -1,5 +1,4 @@
 import React from 'react'
-import LessonFields from '../helpers/LessonFields'
 import SimpleForm from 'fe/forms/Simple'
 import { RouteComponentProps, Link } from 'react-router-dom'
 import { useQuery, useMutation } from 'fe/utils/apollo'
@@ -9,6 +8,7 @@ import { Typography, Paper, Grid, Button, IconButton } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit'
 import urls from 'fe/urls'
 import PlayerLessonTable from './PlayerLessonTable'
+import LessonFields from 'fe/forms/CreateLessonDialog/helpers/LessonFields'
 
 interface ILessonResponse {
   data: {

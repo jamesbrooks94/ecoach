@@ -46,6 +46,7 @@ export const GET_LESSON = gql`
               firstName
               fullName
               surname
+              email
             }
           }
         }

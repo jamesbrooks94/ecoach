@@ -1,12 +1,12 @@
 import React from 'react'
-import SimpleForm from 'fe/forms/Simple'
-import { Grid, Typography } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import { useMutation } from 'fe/utils/apollo'
 import { CREATE_LESSON } from 'fe/queries/lesson'
 import 'date-fns'
-import urls from 'fe/urls'
 import { useAuthContext } from 'fe/context/auth'
-import LessonFields from '../helpers/LessonFields'
+import LessonFields from './helpers/LessonFields'
+import DialogForm from '../Dialog'
+import AddIcon from '@material-ui/icons/Add'
 
 interface ICreateLessonData {
   name: string
@@ -15,9 +15,13 @@ interface ICreateLessonData {
   endTime: Date
 }
 
-const CreateLesson = () => {
+interface ICreateLessonDialogProps {
+  refetch: Function
+}
+
+const CreateLessonDialog: React.FC<ICreateLessonDialogProps> = ({ refetch }) => {
   const { tenant } = useAuthContext()
-  const [createLesson] = useMutation(CREATE_LESSON) as any
+  const [createLesson] = useMutation(CREATE_LESSON, refetch) as any
   const getDate = (hoursToAdd = 0) => {
     const fiveMins = 1000 * 60 * 5
     const date = new Date()
@@ -41,26 +45,23 @@ const CreateLesson = () => {
     startTime: getDate(),
     endTime: getDate(1),
   }
+
   return (
-    <>
-      <SimpleForm
-        onSubmit={createHandler}
-        redirectOnSubmit={urls.lessons.list}
-        initialValues={initialValues}
-      >
-        {({ submitting }: { submitting: boolean }) => {
-          return (
-            <>
-              <Typography variant="h5">Create lesson</Typography>
-              <Grid container spacing={2}>
-                <LessonFields disabled={submitting} />
-              </Grid>
-            </>
-          )
-        }}
-      </SimpleForm>
-    </>
+    <DialogForm
+      trigger={<AddIcon />}
+      onSubmit={createHandler}
+      initialValues={initialValues}
+      title="Create lesson"
+    >
+      {({ submitting }: { submitting: boolean }) => {
+        return (
+          <Grid container spacing={2}>
+            <LessonFields disabled={submitting} />
+          </Grid>
+        )
+      }}
+    </DialogForm>
   )
 }
 
-export default CreateLesson
+export default CreateLessonDialog
