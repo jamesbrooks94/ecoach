@@ -1,40 +1,17 @@
-import { makeExtendSchemaPlugin, gql } from 'postgraphile'
+import { makeExtendSchemaPlugin } from 'postgraphile'
 import { generateEmails } from '../services/mail'
+import typeDefs from './typedefs'
 
 export const extendSchema = makeExtendSchemaPlugin(build => {
   return {
-    typeDefs: gql`
-      type UserInfo {
-        id: String!
-        name: String!
-        tenant: Int!
-        email: String!
-        roles: [String!]
-      }
-      extend type Query {
-        me: UserInfo
-      }
-      extend type Mutation {
-        generateEmails: Boolean
-      }
-    `,
+    typeDefs,
     resolvers: {
       Mutation: {
-        generateEmails: {
-          async resolve(_parent, _args, { user, pgClient }) {
-            console.log(build)
-
-            return generateEmails(user.tenant, pgClient)
-          },
-        },
+        generateEmails: (_parent, _args, { user, pgClient }) =>
+          generateEmails(user?.tenant || 1, pgClient),
       },
       Query: {
-        me: {
-          async resolve(_parent, _args, { user, pgClient, ...c }, d) {
-            await generateEmails(user.tenant, pgClient)
-            return user
-          },
-        },
+        me: (_parent, _args, { user }) => user,
       },
     },
   }

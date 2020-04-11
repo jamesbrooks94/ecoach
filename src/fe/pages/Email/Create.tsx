@@ -7,24 +7,59 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import { Grid } from '@material-ui/core'
 import SimpleForm from 'fe/forms/Simple'
 import { TextField } from 'mui-rff'
-import { useMutation } from 'fe/utils/apollo'
+import { useMutation, useQuery } from 'fe/utils/apollo'
+import { CREATE_EMAIL, GET_EMAIL, UPDATE_EMAIL } from 'fe/queries/email'
+import { useAuthContext } from 'fe/context/auth'
+
 const CreateEmailTemplate = () => {
   const [state, setState] = useState<EditorState>(EditorState.createEmpty())
-  // const [create] = useMutation()
+  const { tenant } = useAuthContext()
+
+  const {
+    data: {
+      application: { templates = [] },
+    },
+    loading,
+    refetch,
+    ...other
+  }: any = useQuery(GET_EMAIL, { variables: { id: tenant } })
+  const [create]: any = useMutation(CREATE_EMAIL, refetch)
+  const [update]: any = useMutation(UPDATE_EMAIL, refetch)
+
+  if (loading) return null
+
+  const template = templates[0]
+  console.log(other)
+  console.log(template)
   const onChange = (editorState: any) => {
     console.log(editorState)
     setState(editorState)
   }
+
   const onSubmit = (variables: any) => {
     const contentHtml = draftToHtml(convertToRaw(state.getCurrentContent()))
 
-    const contentPlain = convert(contentHtml)
-    const data = {
-      ...variables,
-      contentHtml,
-      contentPlain,
+    if (!template) {
+      create({
+        variables: {
+          input: {
+            ...variables,
+            content: contentHtml,
+            application: tenant,
+          },
+        },
+      })
+    } else {
+      update({
+        variables: {
+          id: template.id,
+          input: {
+            ...variables,
+            content: contentHtml,
+          },
+        },
+      })
     }
-    console.log(data)
   }
   return (
     <div>
