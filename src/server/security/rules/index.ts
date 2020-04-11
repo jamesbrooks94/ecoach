@@ -1,7 +1,7 @@
 import { rule, shield } from 'graphql-shield'
 import { makeProcessSchemaPlugin } from 'postgraphile'
 import { applyMiddleware } from 'graphql-middleware'
-import { createLogger } from '../logger'
+import { createLogger } from '../../util/logger'
 
 const logger = createLogger('Permissions')
 

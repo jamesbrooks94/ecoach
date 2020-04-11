@@ -1,6 +1,6 @@
 import knex from 'knex'
 import server from './server/index'
-import { createLogger } from './server/logger'
+import { createLogger } from './server/util/logger'
 import config from './knexfile'
 import { env } from './config'
 

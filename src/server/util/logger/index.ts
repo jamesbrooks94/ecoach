@@ -1,5 +1,5 @@
 import { Logger, loggers, transports, format } from 'winston'
-import { env } from '../../config'
+import { env } from '../../../config'
 
 export const createLogger = (name: string): Logger => {
   const { LOG_LEVEL } = env

@@ -2,7 +2,7 @@ import { ManagementClient, AppMetadata, UserMetadata, AuthenticationClient } fro
 import { default as createJwksClient, JwksClient, SigningKey } from 'jwks-rsa'
 import { Logger } from 'winston'
 import { IUser } from '../interfaces'
-import { createLogger } from '../logger'
+import { createLogger } from '../util/logger'
 
 import { env } from '../../config'
 import { getSigningKey, formatUserInfo } from './utils'

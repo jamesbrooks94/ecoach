@@ -3,20 +3,18 @@ import morgan from 'morgan'
 import helmet from 'helmet'
 import { redirectToHTTPS } from 'express-http-to-https'
 import path from 'path'
-import { postgraphile, makeExtendSchemaPlugin, gql } from 'postgraphile'
-import { plugin } from './rules'
+import { postgraphile } from 'postgraphile'
+import { plugin } from './security/rules'
 import { env } from '../config'
 import { IUser } from './interfaces'
 import { IncomingMessage } from 'http'
 const PostGraphileConnectionFilterPlugin = require('postgraphile-plugin-connection-filter')
 import { getProfile } from './security'
-import { createLogger } from './logger'
-// import { getTokenInfo, verifyToken } from './security/utils'
-// import { getJwksKey } from './security'
+import { createLogger } from './util/logger'
+import { extendSchema } from './plugins/extendSchema'
 
 const AUTHENTICATION_FAILED = 'Authentication failed'
 const NO_BEARER_TOKEN: string = `${AUTHENTICATION_FAILED}, no Bearer token provided in request`
-// const TOKEN_FAILED_VALIDATION: string = `${AUTHENTICATION_FAILED}, token failed validation`
 const ERROR_GETTING_PROFILE: string = `${AUTHENTICATION_FAILED}, Error getting profile`
 const PROFILE_NOT_FOUND: string = `${AUTHENTICATION_FAILED}, profile not found`
 
@@ -31,15 +29,6 @@ const getUser = async (req: IncomingMessage) => {
     throw new Error(NO_BEARER_TOKEN)
   }
   const token = authorization.substr(7)
-  // const { kid } = getTokenInfo(token)
-
-  // const jwksKey = await getJwksKey(kid)
-
-  // try {
-  //   await verifyToken(token, jwksKey)
-  // } catch (err) {
-  //   throw new Error(TOKEN_FAILED_VALIDATION)
-  // }
   try {
     profile = await getProfile(token)
     if (!profile) {
@@ -51,33 +40,6 @@ const getUser = async (req: IncomingMessage) => {
   }
   return profile
 }
-
-const extend = makeExtendSchemaPlugin(build => {
-  return {
-    typeDefs: gql`
-      type UserInfo {
-        id: String!
-        name: String!
-        tenant: Int!
-        email: String!
-        roles: [String!]
-      }
-      extend type Query {
-        me: UserInfo
-      }
-    `,
-    resolvers: {
-      Query: {
-        me: {
-          resolve(_parent, _args, { user }) {
-            logger.debug(user)
-            if (user) return user
-          },
-        },
-      },
-    },
-  }
-})
 
 const server = (appPath: string) => {
   const app = express()
@@ -121,7 +83,7 @@ const server = (appPath: string) => {
       enhanceGraphiql: true,
       graphiqlRoute: '/graphiql',
       disableQueryLog: true,
-      appendPlugins: [PostGraphileConnectionFilterPlugin, extend, plugin],
+      appendPlugins: [PostGraphileConnectionFilterPlugin, extendSchema, plugin],
     })
   )
 
