@@ -26,7 +26,7 @@
     "apollo-client": "^2.6.8",
     "apollo-link-http": "^1.5.16",
     "auth0": "^2.24.0",
-    "auth0-js": "^9.13.1",
+    "auth0-js": "^9.13.2",
     "date-fns": "2.11.1",
     "dotenv": "^8.2.0",
     "envalid": "^6.0.1",
