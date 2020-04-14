@@ -56,8 +56,6 @@ export const generateEmails = async (applicationId: number, pgClient: any) => {
     values: [applicationId],
   })
 
-  //   email.content = '<p>asdasdasd <%= user.name %></p>'
-
   debugger
 
   const t = await Promise.all(
