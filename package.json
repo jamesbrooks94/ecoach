@@ -47,7 +47,7 @@
     "morgan": "^1.10.0",
     "mui-rff": "^2.1.8",
     "notistack": "^0.9.9",
-    "pg": "^8.0.0",
+    "pg": "^8.0.2",
     "postgraphile": "^4.6.0",
     "postgraphile-plugin-connection-filter": "^1.1.3",
     "react": "^16.13.1",
