@@ -1510,10 +1510,10 @@
   resolved "https://registry.yarnpkg.com/@types/auth0-js/-/auth0-js-9.12.4.tgz#93a622e6382163c54387b5471e9fd89d77529a0e"
   integrity sha512-4r3OGEyRYb7r9lHd5TQ/9Mjszopv+JBC5c6Fb2lDfxc7PDFzIpSg9kD0l+4Kd6OmVwwWjqaBWCoqM8Clx/1Yig==
 
-"@types/auth0@^2.20.2":
-  version "2.20.2"
-  resolved "https://registry.yarnpkg.com/@types/auth0/-/auth0-2.20.2.tgz#ece83d80c2902351959e1e8bfc2bf6f8dce9ee19"
-  integrity sha512-1vfJw3iv2P/NNHtzyZzJzBE32e2/dtRCtu155nw4KGx9NkdHqK76DR6siT8i5xvowF9DX5ozJbK23k9GAlk2tw==
+"@types/auth0@^2.20.3":
+  version "2.20.3"
+  resolved "https://registry.yarnpkg.com/@types/auth0/-/auth0-2.20.3.tgz#205240142ff74188252ace08b5001e674f73ea4b"
+  integrity sha512-vY0BWZIuhHT1rCVsWK3yWABD62b7Eoa8aTPh1s3mrOxZDg2+YcTJtE4T9dS8hXr8O9Nm6f9Se6qrmR4G9+9HJg==
 
 "@types/babel__core@^7.1.0":
   version "7.1.6"
