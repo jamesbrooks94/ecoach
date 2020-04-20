@@ -82,7 +82,7 @@
     "@types/yup": "^0.26.34",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.3"
   },
   "eslintConfig": {
     "extends": "react-app"
