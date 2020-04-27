@@ -8827,10 +8827,10 @@ ms@^2.1.1, ms@^2.1.2:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
-mui-rff@^2.1.8:
-  version "2.1.8"
-  resolved "https://registry.yarnpkg.com/mui-rff/-/mui-rff-2.1.8.tgz#af0c9f1ad438e4c160df59eb5cc050b555ca3498"
-  integrity sha512-V08cg02lE50+FLiogHzJieoBwr9j3oE5LTXgsyFKMch189b3qdDVo34UyeH1JoajWuV9dxtXjlUeUUBGCfF9QQ==
+mui-rff@^2.1.11:
+  version "2.1.11"
+  resolved "https://registry.yarnpkg.com/mui-rff/-/mui-rff-2.1.11.tgz#7c11bc779c041b0fa5df92c4c24a8d7187dbc33b"
+  integrity sha512-58Er5lUiKVZBWTL6Qal3aCF6QdTsU5SN/HVI8hHWJEexg5eJHqFueLg3mIMVgQ4spXY5nEWrM/9RvUbALf+0fQ==
   optionalDependencies:
     "@date-io/core" "^1.3.13"
     "@date-io/date-fns" "^1.3.13"
