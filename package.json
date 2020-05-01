@@ -45,7 +45,7 @@
     "lodash": "^4.17.15",
     "material-table": "^1.57.2",
     "morgan": "^1.10.0",
-    "mui-rff": "^2.1.8",
+    "mui-rff": "^2.1.12",
     "notistack": "^0.9.9",
     "pg": "^8.0.3",
     "postgraphile": "^4.6.0",
