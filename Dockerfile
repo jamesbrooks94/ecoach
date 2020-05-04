@@ -1,5 +1,6 @@
 FROM node:alpine
 COPY . .
+
 RUN yarn install
 RUN yarn build
 
