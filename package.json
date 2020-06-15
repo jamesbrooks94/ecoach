@@ -46,7 +46,7 @@
     "material-table": "^1.57.2",
     "morgan": "^1.10.0",
     "mui-rff": "^2.1.8",
-    "notistack": "^0.9.9",
+    "notistack": "^0.9.17",
     "pg": "^8.0.3",
     "postgraphile": "^4.6.0",
     "postgraphile-plugin-connection-filter": "^1.1.3",
