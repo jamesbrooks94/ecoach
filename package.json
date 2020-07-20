@@ -42,7 +42,7 @@
     "history": "^4.10.1",
     "jwks-rsa": "^1.8.0",
     "knex": "^0.20.13",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "material-table": "^1.57.2",
     "morgan": "^1.10.0",
     "mui-rff": "^2.1.8",
