@@ -2682,17 +2682,18 @@ auth0-js@^9.13.2:
     url-join "^4.0.1"
     winchan "^0.2.2"
 
-auth0@^2.24.0:
-  version "2.24.0"
-  resolved "https://registry.yarnpkg.com/auth0/-/auth0-2.24.0.tgz#529ee36d46d2119624b04532b1ac4635a0de0de9"
-  integrity sha512-Z9ElyPGw52/IXOOc4enm1c6M6Ab5wfDG/3LdTiq5jGhT4ZRfkaQtuS9tAvYeCm+j3A4UpTRBjaybCvBELcR2Vg==
+auth0@^2.27.1:
+  version "2.27.1"
+  resolved "https://registry.yarnpkg.com/auth0/-/auth0-2.27.1.tgz#a9bcc766a4c89e12893092611c66d25f9313f6c9"
+  integrity sha512-RpjH7jCSR3YydqK18aXwXUJG5nZfg0Z31Uwp6g9TKtFZG5v79ogwrt+yNYPzV6IgDZH2c7ADSjkeOO75MSCvqg==
   dependencies:
+    axios "^0.19.2"
     bluebird "^3.5.5"
+    form-data "^3.0.0"
     jsonwebtoken "^8.5.1"
-    jwks-rsa "^1.7.0"
+    jwks-rsa "^1.8.0"
     lru-memoizer "^2.1.0"
     object.assign "^4.1.0"
-    request "^2.88.0"
     rest-facade "^1.12.0"
     retry "^0.12.0"
 
@@ -3668,7 +3669,7 @@ colorspace@1.1.x:
     color "3.0.x"
     text-hex "1.0.x"
 
-combined-stream@^1.0.6, combined-stream@~1.0.6:
+combined-stream@^1.0.6, combined-stream@^1.0.8, combined-stream@~1.0.6:
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/combined-stream/-/combined-stream-1.0.8.tgz#c3d45a8b34fd730631a110a8a2520682b31d5a7f"
   integrity sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==
@@ -5736,6 +5737,15 @@ form-data@^2.3.1:
   dependencies:
     asynckit "^0.4.0"
     combined-stream "^1.0.6"
+    mime-types "^2.1.12"
+
+form-data@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/form-data/-/form-data-3.0.0.tgz#31b7e39c85f1355b7139ee0c647cf0de7f83c682"
+  integrity sha512-CKMFDglpbMi6PyN+brwB9Q/GOw0eAnsrEZDgcsH5Krhz5Od/haKHAX0NmQfha2zPPz0JpWzA7GJHGSnvCRLWsg==
+  dependencies:
+    asynckit "^0.4.0"
+    combined-stream "^1.0.8"
     mime-types "^2.1.12"
 
 form-data@~2.3.2:
@@ -8024,7 +8034,7 @@ jwa@^1.4.1:
     ecdsa-sig-formatter "1.0.11"
     safe-buffer "^5.0.1"
 
-jwks-rsa@^1.7.0, jwks-rsa@^1.8.0:
+jwks-rsa@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/jwks-rsa/-/jwks-rsa-1.8.0.tgz#4b13d962f82128ed06e30c7cc9d3a04652c1ec7c"
   integrity sha512-+HYROHD5fsYQCNrJ37RSr2NjbN2/V9YT+yVF3oJxLmPIZWrmp1SOl1hMw2RcuNh+LGA2bGZIhRKGiMjhQa/b7Q==
